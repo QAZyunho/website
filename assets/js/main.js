@@ -1,4 +1,4 @@
-// Vanilla JS — behaviors: (1) publication filter tabs, (2) mobile nav toggle,
+// Vanilla JS - behaviors: (1) publication filter tabs, (2) mobile nav toggle,
 // (3) image lightbox, (4) light/dark theme toggle.
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // (3) Image lightbox — click a content image to view it full-screen.
+  // (3) Image lightbox - click a content image to view it full-screen.
   var overlay = document.createElement('div');
   overlay.className = 'img-overlay';
   overlay.innerHTML = '<img alt="">';

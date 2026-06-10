@@ -21,7 +21,7 @@ detailed one. New here? Start with **First deploy**.
 ## 1. First deploy: zero to live
 
 **Prerequisites:** [Hugo Extended](https://gohugo.io/installation/) ≥ 0.146
-(the *Extended* build is required — it compiles the theme's Sass; plain Hugo
+(the *Extended* build is required - it compiles the theme's Sass; plain Hugo
 fails). Git, a GitHub account, and Python 3 if you want the browser dashboard.
 
 1. **Create your repo from the template.** On GitHub, click **Use this template →
@@ -30,7 +30,7 @@ fails). Git, a GitHub account, and Python 3 if you want the browser dashboard.
    git clone https://github.com/<you>/<repo>.git && cd <repo>
    ```
 
-2. **Personalize.** Run the setup prompt — it rewrites your name, affiliation,
+2. **Personalize.** Run the setup prompt - it rewrites your name, affiliation,
    social links, palette, and Pages URL into the config files (details in
    [§2](#2-how-python-initpy-works)):
    ```bash
@@ -43,10 +43,10 @@ fails). Git, a GitHub account, and Python 3 if you want the browser dashboard.
    ```
 
 4. **Replace the demo content** (the *Joomo Makguli* persona). At minimum:
-   - `content/_index.md` — your bio (and `_index.<lang>.md` per language)
-   - `data/<lang>/*.yml` — publications, news, cv, research_interests
-   - `static/images/profile.svg` — your photo (any image; update `profileImage`)
-   - `static/cv.pdf` — your CV PDF
+   - `content/_index.md` - your bio (and `_index.<lang>.md` per language)
+   - `data/<lang>/*.yml` - publications, news, cv, research_interests
+   - `static/images/profile.svg` - your photo (any image; update `profileImage`)
+   - `static/cv.pdf` - your CV PDF
    Edit these by hand, or use the dashboard ([§3](#3-write-a-blog-post),
    [§4](#4-edit-publications-news--cv)).
 
@@ -55,7 +55,7 @@ fails). Git, a GitHub account, and Python 3 if you want the browser dashboard.
    git add -A && git commit -m "chore: personalize template" && git push
    ```
 
-6. **Turn on Pages — using GitHub Actions, _not_ a branch.** In your repo:
+6. **Turn on Pages - using GitHub Actions, _not_ a branch.** In your repo:
    **Settings → Pages → Build and deployment → Source: _GitHub Actions_.**
    This template ships `.github/workflows/deploy.yml`, which builds with Hugo
    Extended and publishes on every push to `main`. Watch progress under the
@@ -66,7 +66,7 @@ fails). Git, a GitHub account, and Python 3 if you want the browser dashboard.
    > broken or 404 site. The source **must** be *GitHub Actions*. See
    > [§7](#7-common-mistakes--gotchas).
 
-Your site is now live at the `baseURL` you set — typically
+Your site is now live at the `baseURL` you set - typically
 `https://<you>.github.io/<repo>/`. Every later `git push` to `main` redeploys.
 
 ---
@@ -74,8 +74,8 @@ Your site is now live at the `baseURL` you set — typically
 ## 2. How `python init.py` works
 
 `init.py` is a zero-dependency, re-runnable personalizer. It makes **surgical**
-edits to two files — `config/_default/hugo.toml` and
-`config/_default/params.yaml` — replacing only the owner-editable values and
+edits to two files - `config/_default/hugo.toml` and
+`config/_default/params.yaml` - replacing only the owner-editable values and
 leaving comments, structure, and the language list untouched.
 
 Run it from the repo root:
@@ -84,14 +84,14 @@ Run it from the repo root:
 python init.py
 ```
 
-It prompts for each value, showing the current one in brackets — **press Enter to
+It prompts for each value, showing the current one in brackets - **press Enter to
 keep it**:
 
 | Prompt | Writes to | Notes |
 |---|---|---|
 | Your name (site title) | `hugo.toml` `title` | Shown as the site title |
-| GitHub username | — | Optional; only used to suggest the URLs below |
-| Repository name | — | Combined with the username to suggest `baseURL` |
+| GitHub username | - | Optional; only used to suggest the URLs below |
+| Repository name | - | Combined with the username to suggest `baseURL` |
 | Site baseURL | `hugo.toml` `baseURL` | Defaults to `https://<user>.github.io/<repo>/` |
 | Affiliation / description | `params.yaml` `description` | Line under your name |
 | Tagline | `params.yaml` `tagline` | One-liner on the home page |
@@ -104,7 +104,7 @@ keep it**:
 
 Because the edits are surgical and Enter-to-keep, you can run it again any time to
 change one value without disturbing the rest. It does **not** touch content,
-languages, or per-language overrides — those stay manual (see
+languages, or per-language overrides - those stay manual (see
 [§5](#5-add-a-language)).
 
 ---
@@ -123,13 +123,13 @@ python cms-server.py     # then open http://localhost:8787/
 1. Pick the **Content** language (top-right) you're writing in.
 2. **Blog → New post.** Fill in title, filename (slug; auto-derived from the title
    if left blank), date, tags, draft flag, and description.
-3. Write in the **split Markdown editor** — source on the right, live preview on
+3. Write in the **split Markdown editor** - source on the right, live preview on
    the left.
 4. **Paste images with `Ctrl+V`.** The image is hashed, uploaded to
    `static/images/uploads/`, and a root-relative `![](/images/uploads/…)` link is
    inserted at the cursor. On your site it opens in a click-to-zoom lightbox.
-   (Pasted images commit immediately; text edits stage — see below.)
-5. **Save post** — this *stages* the change. When you're done editing, click the
+   (Pasted images commit immediately; text edits stage - see below.)
+5. **Save post** - this *stages* the change. When you're done editing, click the
    **Commit (N)** button in the nav bar to flush everything as **one** commit.
    In local mode that commits to your local repo; remember to `git push`.
 
@@ -144,7 +144,7 @@ date: 2025-01-01T09:00:00Z
 tags:
   - meta
 draft: false
-description: First placeholder post — replace with your own.
+description: First placeholder post - replace with your own.
 ---
 
 Write in **Markdown**. Lists, code blocks, block quotes, and tables all render
@@ -153,7 +153,7 @@ with reasonable typography.
 
 Set `draft: true` to hide a post from the production build (`hugo server -D`
 shows drafts locally). For a translation, copy to `<slug>.<lang>.md` and translate
-the prose — keep the same slug so the language switcher links the two.
+the prose - keep the same slug so the language switcher links the two.
 
 ---
 
@@ -186,7 +186,7 @@ the author line.
 
 - `type` drives the filter tabs on the Publications page.
 - `selected: true` surfaces the paper on the home page shortlist.
-- `interest` cross-links the paper onto a research-interest page — the value must
+- `interest` cross-links the paper onto a research-interest page - the value must
   **exactly** match that interest's `title` (see [§5](#5-add-a-language) about
   keeping titles stable across languages).
 
@@ -203,7 +203,7 @@ Markdown links.
 
 ### CV (`data/<lang>/cv.yml`)
 
-Four optional sections — `education`, `awards`, `service`, `teaching` — each
+Four optional sections - `education`, `awards`, `service`, `teaching` - each
 rendered only if present:
 
 ```yaml
@@ -263,7 +263,7 @@ The template ships English (default) + a Korean demo. To add `<lang>`:
 2. **Translate the UI strings:** copy `i18n/en.toml` to `i18n/<lang>.toml` and
    translate the values.
 3. **Add the data:** copy `data/en/` to `data/<lang>/` and translate the prose.
-   **Keep the `title` keys identical** to the default language — slugs and the
+   **Keep the `title` keys identical** to the default language - slugs and the
    `interest` cross-links are matched by title, so changing them breaks the links.
 4. **Add content siblings:** for each page, add `<name>.<lang>.md`
    (e.g. `_index.<lang>.md`, `content/blog/<slug>.<lang>.md`), plus a
@@ -285,20 +285,20 @@ hand-editing YAML. It covers:
   `github`, `linkedin`.
 - **Appearance:** `faviconEmoji`, `profileImage`, `palette`.
 - **`cvPdf`:** path to your CV under `static/`.
-- **Sections:** toggle `research`, `publications`, `blog`, `news`, `cv` on/off —
+- **Sections:** toggle `research`, `publications`, `blog`, `news`, `cv` on/off -
   this gates both the nav tabs and the home-page sections.
 
 What the Settings tab **cannot** change (edit `config/_default/hugo.toml` by hand):
 your **name/site title**, the **baseURL**, and the **language list**. Saving
-Settings rewrites `params.yaml` and **drops its comments** — that's expected.
+Settings rewrites `params.yaml` and **drops its comments** - that's expected.
 
-> The dashboard's own chrome — palette, light/dark, and UI language — is set from
+> The dashboard's own chrome - palette, light/dark, and UI language - is set from
 > its header and is independent of the site's visitor theme.
 
 **Local vs. Pages mode.** Run `python cms-server.py` locally and it commits to your
 local git repo over loopback (no token). If you instead serve the dashboard from
 GitHub Pages, it commits through the GitHub API using a **fine-grained PAT**
-(Contents: read/write) you paste in — click **Authorize with GitHub** to open the
+(Contents: read/write) you paste in - click **Authorize with GitHub** to open the
 token page pre-filled. Use a short expiry; the dashboard self-expires the stored
 token after 2 days.
 
@@ -315,7 +315,7 @@ token after 2 days.
 - **Use Hugo _Extended_.** The theme compiles Sass natively; the plain Hugo binary
   errors out. Need ≥ 0.146 for content adapters.
 - **Saving in the local dashboard is not deploying.** Local edits commit to your
-  **local** repo — you still have to `git push` to trigger the build.
+  **local** repo - you still have to `git push` to trigger the build.
 - **Keep `title` keys identical across languages.** Slugs and the
   publication↔interest cross-links match by title; translating a title silently
   breaks those links. Translate the prose, not the keys. ([§5](#5-add-a-language))
@@ -324,7 +324,7 @@ token after 2 days.
 - **Settings saves drop YAML comments.** The dashboard rewrites `params.yaml`; if
   you keep notes in comments there, expect them to vanish on save.
 - **Pages CDN caches HTML ~10 minutes.** After a deploy, a hard refresh (or a few
-  minutes' wait) may be needed to see changes — this is GitHub's cache, not a build
+  minutes' wait) may be needed to see changes - this is GitHub's cache, not a build
   failure.
 - **Visitors need a 2023+ browser.** Theming uses CSS relative-color syntax
   (Chrome 119, Safari 16.4, Firefox 128).

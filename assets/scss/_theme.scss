@@ -4,8 +4,8 @@
   visitor light/dark mode (data-theme, toggled in static/js/main.js).
 
   Translucent and shaded tokens use CSS relative-color syntax
-  (rgb(from …) / hsl(from …)), so flipping a base color in dark mode — or swapping
-  the accent via a palette — automatically updates everything derived from it.
+  (rgb(from …) / hsl(from …)), so flipping a base color in dark mode - or swapping
+  the accent via a palette - automatically updates everything derived from it.
   Relative color requires a 2023+ browser (Chrome 119, Safari 16.4, Firefox 128).
 */
 

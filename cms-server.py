@@ -69,7 +69,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def _local_only(self):
         # This server is strictly for local use. Reject non-loopback clients and
-        # foreign Host headers — the latter guards against DNS-rebinding, where a
+        # foreign Host headers - the latter guards against DNS-rebinding, where a
         # malicious site resolves a hostname to 127.0.0.1 to reach this server.
         if self.client_address[0] not in ("127.0.0.1", "::1"):
             self._json(403, {"error": "local only"})

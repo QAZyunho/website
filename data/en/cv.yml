@@ -1,5 +1,5 @@
-# Curriculum vitae data. Four optional sections — education, awards, service,
-# teaching — each rendered only if present. The cv-section partial detects the
+# Curriculum vitae data. Four optional sections - education, awards, service,
+# teaching - each rendered only if present. The cv-section partial detects the
 # section by a distinctive key (degree / course / role / title).
 education:
   - institution: Jumak National University

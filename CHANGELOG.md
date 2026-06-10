@@ -3,7 +3,7 @@
 All notable changes to this template are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com).
 
-## [1.0.0] — First public distribution, Ready for alpha test
+## [1.0.0] - First public distribution, Ready for alpha test
 
 ### Added
 - **Dashboard bulk commit ("Save & Exit").** Editor saves now **stage** changes in
@@ -19,21 +19,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 - **Dashboard auto-translation (free, keyless).** A "⤳ Translate from …" button in
   the Publications/News/CV, blog-post, and research-interest editors pulls content
   from another language and loads a machine translation **into the editor you're
-  in** — it never commits on its own, so you review the draft and save like any
+  in** - it never commits on its own, so you review the draft and save like any
   other edit. The source is the default language (or the first other language when
   you're editing the default). Uses MyMemory entirely client-side (no API key, no
   backend, CORS) so it works locally and on the deployed Pages dashboard. It is
-  **field-aware** (only prose is translated — titles, authors, venues, URLs, dates,
+  **field-aware** (only prose is translated - titles, authors, venues, URLs, dates,
   and slugs stay identical across languages), **markdown-safe** (links/code/images/
   bare URLs kept verbatim; `**bold**`/`*italic*`/`~~strike~~` markers preserved,
   inner text translated; long text chunked under MyMemory's 500-byte limit), and
   **gap-fill by default** so existing hand-edits in the editor are never overwritten
   (it asks before a full re-translate). Conventional MT yields a reviewable draft,
   not final prose.
-- **`init.py` — post-clone setup.** A zero-dependency, cross-platform Python
+- **`init.py` - post-clone setup.** A zero-dependency, cross-platform Python
   prompt that personalizes `config/_default/hugo.toml` (title, baseURL) and
   `params.yaml` (affiliation, social links, palette, favicon). Surgical line
-  edits — comments, structure, and the language list are preserved; re-runnable.
+  edits - comments, structure, and the language list are preserved; re-runnable.
 - **Dashboard: "Authorize with GitHub".** A login button that deep-links to
   GitHub's fine-grained token page pre-filled (name/description), then the user
   pastes the scoped token back. Stays backendless (a static site can't run the
@@ -54,25 +54,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
   browser cache for it immediately. (GitHub Pages still imposes its own ~10-min
   CDN cache on the HTML itself, which the repo can't override.)
 - **Themed demo content.** The placeholder persona is now a coherent, playful
-  demo — *Joomo Makguli*, a makgeolli-fermentation researcher at Jumak National
-  University — across the bio, research interests, publications, news, CV, and
+  demo - *Joomo Makguli*, a makgeolli-fermentation researcher at Jumak National
+  University - across the bio, research interests, publications, news, CV, and
   blog (EN + KO). Shows off the template with real cross-links intact rather than
   generic lorem-ipsum.
 
-## [0.0.0] — Initial template release
+## [0.0.0] - Initial template release
 
 The portfolio, generalized into a reusable Hugo template.
 
 ### Added
-- **Multilingual support** — Hugo `[languages]` (English default + Korean demo),
+- **Multilingual support** - Hugo `[languages]` (English default + Korean demo),
   UI strings in `i18n/*.toml`, per-language content (`.<lang>.md`) and data
   (`data/<lang>/`), and a header language dropdown.
-- **Owner configuration** in `config/_default/params.yaml` — identity, social links,
+- **Owner configuration** in `config/_default/params.yaml` - identity, social links,
   color palette, and per-section enable toggles (gating nav tabs and home sections).
-- **Color palettes + light/dark mode** — named palettes (forest/slate/crimson/plum)
+- **Color palettes + light/dark mode** - named palettes (forest/slate/crimson/plum)
   and a visitor light/dark toggle, both via CSS custom properties; the owner palette
   is set from config, the theme choice persists per browser with no flash on load.
-- **Site Settings dashboard** — the `/admin/` content editor gained a Settings panel
+- **Site Settings dashboard** - the `/admin/` content editor gained a Settings panel
   (edits `params.yaml`) and a content-language selector for per-language editing.
 - **MIT license** and template documentation.
 

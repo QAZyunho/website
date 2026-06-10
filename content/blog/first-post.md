@@ -4,12 +4,12 @@ date: 2025-01-01T09:00:00Z
 tags:
   - meta
 draft: false
-description: First placeholder post — replace with your own.
+description: First placeholder post - replace with your own.
 ---
 
 This is a placeholder blog post. Write in Markdown: **Bold**Intro * - Italic*Intro [Link](/),
 Lists, blocks of code, block quotes and tables are all rendered with reasonable typography.
-Default — Suitable for both tasting notes and fermentation logs.
+Default - Suitable for both tasting notes and fermentation logs.
 
 ```python
 def cheers(name: str) -> str:

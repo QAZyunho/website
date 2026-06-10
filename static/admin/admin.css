@@ -1,4 +1,4 @@
-/* Content Dashboard — mirrors the site's theming: an owner palette (data-palette
+/* Content Dashboard - mirrors the site's theming: an owner palette (data-palette
    on <html>, from params.palette) and a visitor light/dark mode (data-theme,
    shared with the site via the 'theme' localStorage key). Translucent tokens use
    CSS relative-color syntax so flipping a base color cascades (2023+ browsers). */
@@ -19,12 +19,12 @@
   --field-bg: var(--surface);
 }
 
-/* Owner palettes (accents only) — values match assets/scss/_theme.scss. */
+/* Owner palettes (accents only) - values match assets/scss/_theme.scss. */
 [data-palette="slate"]   { --forest: #3b6ea5; --walnut: #566072; --tangerine: #d98324; }
 [data-palette="crimson"] { --forest: #a4243b; --walnut: #7a3b2e; --tangerine: #e07a5f; }
 [data-palette="plum"]    { --forest: #6b4e8f; --walnut: #6d5a7a; --tangerine: #d08a5e; }
 
-/* Dark mode — flip surfaces; derived translucents follow automatically. */
+/* Dark mode - flip surfaces; derived translucents follow automatically. */
 [data-theme="dark"] {
   --carbon: #ECEAE3;
   --porcelain: #1A1A18;

@@ -8,7 +8,7 @@
   </main>
   {{ partial "footer.html" . }}
   
-  {{/* Fingerprinted so a content change yields a new URL — new deploys bust the
+  {{/* Fingerprinted so a content change yields a new URL - new deploys bust the
        browser cache immediately (the unhashed static/ path cached for ~10 min). */}}
   {{ $js := resources.Get "js/main.js" | fingerprint }}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

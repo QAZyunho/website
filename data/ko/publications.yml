@@ -12,7 +12,7 @@
   codeUrl: "https://github.com/example/repo"
   dataUrl: "https://example.com/dataset"
   projectUrl: "https://example.com/project"
-  abstract: "자리표시자 초록입니다. 논문의 초록으로 바꾸세요 — 이 출판물의 전용 페이지 본문으로 렌더링됩니다. 가을 누룩 한 배치에서 학습한 풍미가 봄·여름 발효로도 바디감 손실 없이 전이됨을 보입니다."
+  abstract: "자리표시자 초록입니다. 논문의 초록으로 바꾸세요 - 이 출판물의 전용 페이지 본문으로 렌더링됩니다. 가을 누룩 한 배치에서 학습한 풍미가 봄·여름 발효로도 바디감 손실 없이 전이됨을 보입니다."
 - title: "On the Generalization of Brews Under Temperature Shift"
   authors: "Bo-ri Lee, **Joomo Makguli**"
   venue: "Journal of Makgeolli Learning Research"

@@ -10,7 +10,7 @@
   codeUrl: https://github.com/example/repo
   dataUrl: https://example.com/dataset
   projectUrl: https://example.com/project
-  abstract: Placeholder abstract. Replace with your paper's abstract — it renders as the body of this publication's dedicated page. We show that a flavor profile learned from a single autumn batch of nuruk transfers to spring and summer fermentations with no loss of body.
+  abstract: Placeholder abstract. Replace with your paper's abstract - it renders as the body of this publication's dedicated page. We show that a flavor profile learned from a single autumn batch of nuruk transfers to spring and summer fermentations with no loss of body.
 - title: On the Generalization of Brews Under Temperature Shift
   authors: Bo-ri Lee, **Joomo Makguli**
   venue: Journal of Makgeolli Learning Research

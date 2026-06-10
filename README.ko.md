@@ -1,4 +1,4 @@
-# Academic Portfolio — 연구자를 위한 Hugo 템플릿
+# Academic Portfolio: 연구자를 위한 노코드 Hugo 템플릿
 
 [English](/README.md) · 한국어
 
@@ -37,13 +37,13 @@ MIT 라이선스  ·  정적 사이트, GitHub Pages 무료 호스팅
 
 **사전 준비:** [Hugo Extended](https://gohugo.io/installation/) 0.146 버전 이상 (콘텐츠 어댑터 + 기본 Sass 지원). 브라우저 대시보드를 사용하려면 Python 3가 필요합니다. 테마가 CSS 상대 색상 구문을 사용하므로 2023년 이후의 최신 브라우저가 필요합니다.
 
-1. **템플릿 가져오기** — GitHub에서 *Use this template*을 클릭하거나 클론하세요:
+1. **템플릿 가져오기** - GitHub에서 *Use this template*을 클릭하거나 클론하세요:
 
 ```bash
 git clone  && cd 
 ```
 
-2. **개인화** — `init.py` 스크립트를 실행하면 `hugo.toml`과 `params.yaml`을 자동으로 업데이트합니다(이름, 소속, 링크, 팔레트 등). 주석이나 기존 설정은 유지됩니다:
+2. **개인화** - `init.py` 스크립트를 실행하면 `hugo.toml`과 `params.yaml`을 자동으로 업데이트합니다(이름, 소속, 링크, 팔레트 등). 주석이나 기존 설정은 유지됩니다:
 
 ```bash
 python init.py
@@ -51,13 +51,13 @@ python init.py
 
 직접 수정하고 싶다면 이 과정을 건너뛰고 [사용자 맞춤 설정](#사용자-맞춤-설정-make-it-yours)을 확인하세요.
 
-3. **미리보기** — 수정 시 실시간으로 반영됩니다:
+3. **미리보기** - 수정 시 실시간으로 반영됩니다:
 
 ```bash
 hugo server      # http://localhost:1313/
 ```
 
-4. **콘텐츠 추가** — Markdown/YAML을 직접 수정하거나 대시보드를 사용하세요:
+4. **콘텐츠 추가** - Markdown/YAML을 직접 수정하거나 대시보드를 사용하세요:
 
 ```bash
 python cms-server.py   # http://localhost:8787/ 접속
@@ -65,7 +65,7 @@ python cms-server.py   # http://localhost:8787/ 접속
 
    `content/_index.md`의 데모 약력, `data/en/*.yml`의 데이터, `static/images/profile.svg`, `static/cv.pdf`를 본인의 것으로 교체하세요.
 
-5. **배포** — `baseURL`을 GitHub Pages 주소로 설정한 후 푸시하세요. GitHub Actions가 자동으로 빌드 및 배포합니다:
+5. **배포** - `baseURL`을 GitHub Pages 주소로 설정한 후 푸시하세요. GitHub Actions가 자동으로 빌드 및 배포합니다:
 
 ```bash
 git push origin main
@@ -79,9 +79,9 @@ git push origin main
 
 수동으로 설정하거나 `init.py`가 제공하는 범위를 넘어서는 커스터마이징을 원할 경우 다음 단계를 따르세요:
 
-1. **정보 및 구조** — `config/_default/hugo.toml`에서 `baseURL`, `title`(사용자 이름), 언어 목록을 설정합니다. `config/_default/params.yaml`에서 `description`, `tagline`, 소셜 링크, `palette` 및 각 섹션 활성화 여부를 설정합니다.
-2. **콘텐츠** — `data/<lang>/*.yml`의 데모 데이터(논문, 뉴스, 이력서, 연구 분야), `content/_index.md`의 약력, `content/blog/`의 데모 게시물을 본인의 콘텐츠로 교체합니다. `static/images/profile.svg`와 `static/cv.pdf`도 본인의 파일로 변경하세요.
-3. **미리보기 및 배포** — `hugo server`로 미리 확인한 후, `main` 브랜치에 푸시하여 배포합니다.
+1. **정보 및 구조** - `config/_default/hugo.toml`에서 `baseURL`, `title`(사용자 이름), 언어 목록을 설정합니다. `config/_default/params.yaml`에서 `description`, `tagline`, 소셜 링크, `palette` 및 각 섹션 활성화 여부를 설정합니다.
+2. **콘텐츠** - `data/<lang>/*.yml`의 데모 데이터(논문, 뉴스, 이력서, 연구 분야), `content/_index.md`의 약력, `content/blog/`의 데모 게시물을 본인의 콘텐츠로 교체합니다. `static/images/profile.svg`와 `static/cv.pdf`도 본인의 파일로 변경하세요.
+3. **미리보기 및 배포** - `hugo server`로 미리 확인한 후, `main` 브랜치에 푸시하여 배포합니다.
 
 ### 설정 참조 (`config/_default/params.yaml`)
 
@@ -126,8 +126,8 @@ git push origin main
 
 콘텐츠를 수정하는 두 가지 방법:
 
-1. **직접 편집** — Markdown/YAML 파일을 직접 수정하고 커밋합니다.
-2. **대시보드** — Python 기반의 로컬 서버를 통해 편집하고 저장하면, 변경 사항을 한 번에 모아서 하나의 커밋으로 푸시할 수 있습니다.
+1. **직접 편집** - Markdown/YAML 파일을 직접 수정하고 커밋합니다.
+2. **대시보드** - Python 기반의 로컬 서버를 통해 편집하고 저장하면, 변경 사항을 한 번에 모아서 하나의 커밋으로 푸시할 수 있습니다.
 
 ```bash
 python cms-server.py     # http://localhost:8787/ 접속

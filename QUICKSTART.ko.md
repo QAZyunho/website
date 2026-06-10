@@ -42,10 +42,10 @@ hugo server           # http://localhost:1313/
 
 
 4. **데모 콘텐츠 교체** (예: *Joomo Makguli* 페르소나): 최소 다음 항목을 교체하세요:
-* `content/_index.md` — 약력 (언어별 `_index.<lang>.md` 포함)
-* `data/<lang>/*.yml` — 논문, 뉴스, CV, 연구 분야
-* `static/images/profile.svg` — 본인 사진 (이미지 교체 후 `profileImage` 설정 업데이트)
-* `static/cv.pdf` — 이력서 PDF
+* `content/_index.md` - 약력 (언어별 `_index.<lang>.md` 포함)
+* `data/<lang>/*.yml` - 논문, 뉴스, CV, 연구 분야
+* `static/images/profile.svg` - 본인 사진 (이미지 교체 후 `profileImage` 설정 업데이트)
+* `static/cv.pdf` - 이력서 PDF
 직접 수정하거나 대시보드를 사용하세요 ([§3](#3-블로그-포스트-작성),
    [§4](#4-논문-뉴스-및-cv-편집)).
 
@@ -56,7 +56,7 @@ git add -A && git commit -m "chore: personalize template" && git push
 ```
 
 
-6. **GitHub Pages 설정 — 브랜치가 아닌 GitHub Actions 사용:** 저장소 설정에서:
+6. **GitHub Pages 설정 - 브랜치가 아닌 GitHub Actions 사용:** 저장소 설정에서:
 **Settings → Pages → Build and deployment → Source: *GitHub Actions*.**
 이 템플릿은 Hugo Extended로 빌드하고 `main` 푸시 시 자동으로 배포하는 `.github/workflows/deploy.yml`을 포함합니다. **Actions** 탭에서 진행 상황을 확인하세요. 첫 실행은 1~2분 정도 걸립니다.
 > ⚠️ *Deploy from a branch*를 선택하면 GitHub가 존재하지 않는 브랜치를 참조하거나 원본 파일을 그대로 서빙하여 사이트가 깨지거나 404 에러가 발생합니다. 소스는 반드시 **GitHub Actions**여야 합니다. [§7](#7-흔한-실수-및-주의사항)을 참고하세요.
@@ -82,8 +82,8 @@ python init.py
 | 항목 | 작성 대상 | 비고 |
 | --- | --- | --- |
 | 사용자 이름 (사이트 제목) | `hugo.toml` `title` | 사이트 제목으로 표시 |
-| GitHub 사용자명 | — | URL 제안 시 사용 |
-| 저장소 이름 | — | `baseURL` 제안 시 사용 |
+| GitHub 사용자명 | - | URL 제안 시 사용 |
+| 저장소 이름 | - | `baseURL` 제안 시 사용 |
 | 사이트 baseURL | `hugo.toml` `baseURL` | 기본값 `https://<user>.github.io/<repo>/` |
 | 소속/설명 | `params.yaml` `description` | 이름 아래 줄 |
 | 태그라인 | `params.yaml` `tagline` | 홈페이지 한 줄 요약 |
