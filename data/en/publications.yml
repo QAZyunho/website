@@ -1,40 +1,36 @@
-# Each entry becomes a page at /publications/<slugified-title>/ and a row on the
-# publications list. Wrap YOUR name in **markdown bold** so it is highlighted in
-# the author list. `type` must be one of: Conference, Workshop, Journal, Preprint.
-# `selected: true` surfaces the entry on the home page. `interest` (optional) must
-# match a title in data/research_interests.yml to cross-link the two pages.
-# Omit any *Url field you don't have.
-- title: "Learning Robust Brews from Limited Nuruk"
-  authors: "**Joomo Makguli**, Bo-ri Lee, Han Saemi"
-  venue: "BrewNIPS"
+- title: Learning Robust Brews from Limited Nuruk
+  authors: '**Joomo Makguli**, Bo-ri Lee, Han Saemi'
+  venue: BrewNIPS
   year: 2025
-  type: "Conference"
-  selected: true                       # shown in the home "Publications" list
-  award: "Outstanding Pour Award"      # optional — renders a 🏆 badge
-  interest: "Fermentation Dynamics"    # must match a research_interests.yml title
-  paperUrl: "https://example.com/paper"
-  codeUrl: "https://github.com/example/repo"
-  dataUrl: "https://example.com/dataset"
-  projectUrl: "https://example.com/project"
-  abstract: "Placeholder abstract. Replace with your paper's abstract — it renders as the body of this publication's dedicated page. We show that a flavor profile learned from a single autumn batch of nuruk transfers to spring and summer fermentations with no loss of body."
-- title: "On the Generalization of Brews Under Temperature Shift"
-  authors: "Bo-ri Lee, **Joomo Makguli**"
-  venue: "Journal of Makgeolli Learning Research"
-  year: 2024
-  type: "Journal"
+  type: Conference
   selected: true
-  paperUrl: "https://example.com/paper"
-  codeUrl: "https://github.com/example/repo"
-- title: "A Simple Baseline for Few-Sip Tasting"
-  authors: "**Joomo Makguli**, Maria Garcia"
-  venue: "ICML Workshop on Fermentation"
+  award: Outstanding Pour Award
+  interest: Fermentation Dynamics
+  paperUrl: https://example.com/paper
+  codeUrl: https://github.com/example/repo
+  dataUrl: https://example.com/dataset
+  projectUrl: https://example.com/project
+  abstract: Placeholder abstract. Replace with your paper's abstract — it renders as the body of this publication's dedicated page. We show that a flavor profile learned from a single autumn batch of nuruk transfers to spring and summer fermentations with no loss of body.
+- title: On the Generalization of Brews Under Temperature Shift
+  authors: Bo-ri Lee, **Joomo Makguli**
+  venue: Journal of Makgeolli Learning Research
   year: 2024
-  type: "Workshop"
-  paperUrl: "https://example.com/paper"
-- title: "Toward Interpretable Tavern Science"
-  authors: "**Joomo Makguli**, Wei Chen, Sofia Rossi"
-  venue: "arXiv"
+  type: Journal
+  selected: true
+  paperUrl: https://example.com/paper
+  codeUrl: https://github.com/example/repo
+  interest: Fermentation Dynamics
+- title: A Simple Baseline for Few-Sip Tasting
+  authors: '**Joomo Makguli**, Maria Garcia'
+  venue: ICML Workshop on Fermentation
+  year: 2024
+  type: Workshop
+  paperUrl: https://example.com/paper
+  interest: Fermentation Dynamics
+- title: Toward Interpretable Tavern Science
+  authors: '**Joomo Makguli**, Wei Chen, Sofia Rossi'
+  venue: arXiv
   year: 2025
-  type: "Preprint"
-  paperUrl: "https://arxiv.org/abs/0000.00000"
-  codeUrl: "https://github.com/example/repo"
+  type: Preprint
+  paperUrl: https://arxiv.org/abs/0000.00000
+  codeUrl: https://github.com/example/repo
