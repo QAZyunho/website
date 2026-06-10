@@ -1,7 +1,7 @@
 # Structural site configuration. Owner-editable settings (identity, social links,
 # palette, enabled sections) live in params.yaml so the /admin dashboard can edit
 # them as YAML. Per-language param overrides stay here under [languages.<lang>.params].
-baseURL = "https://2ood.github.io/hugo-academic-portfolio/"
+baseURL = "https://2ood.github.io/hugo-academic-portfolio"
 locale = "en"
 title = "Your Name"
 defaultContentLanguage = "en"
