@@ -7,10 +7,10 @@ googleScholar: https://scholar.google.com/
 github: https://github.com/username
 linkedin: https://linkedin.com/in/username
 cvPdf: cv.pdf
-palette: forest
+palette: plum
 sections:
   research: true
-  publications: false
+  publications: true
   blog: true
   news: true
   cv: true
