@@ -27,9 +27,10 @@ High-level direction for the template. Notable changes live in
 - **Themed demo persona** — *Joomo Makguli* makgeolli-research demo content (EN/KO).
 
 ## Next up (next session)
-- [ ] **Grammar-check button** — alongside the per-editor ⤳ translate button, a
-      button that proofreads the current language's prose in place (keyless/free
-      where possible, same field-aware + markdown-safe handling as auto-translate).
+- [~] **Grammar-check button** — *Gave up.* No good keyless/free path: LanguageTool's
+      public API effectively needs an account/API key for reliable use, and the only
+      strong free Korean checker (bareun.ai) is a manual copy-paste round-trip — not
+      worth the UX cost. Shelved unless a genuinely free, CORS-friendly option appears.
 
 Onboarding polish (carried over):
 - [ ] **Quickstart guide with friendly snapshots** — a short, visual "get running in

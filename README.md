@@ -1,57 +1,99 @@
-# Academic Portfolio — Hugo Template
+# Academic Portfolio — a Hugo template for researchers
 
-A quiet, paper-like academic portfolio and research blog, built with **Hugo**
-(Extended). Bio, research interests, publications, news, CV, and a bilingual-ready
-blog - with a warm off-white palette and the bilingual **Chiron GoRound TC**
-typeface so Latin and Hangul render with equal care.
+**English** · [한국어](README.ko.md)
 
-It is intentionally dependency-light: no Node.js, no JS framework, no build step
-beyond the Hugo binary. A small zero-dependency Python dashboard (`cms-server.py`)
-lets you edit content and settings from the browser when you want to.
+A quiet, paper-like academic portfolio and research blog. Bio, research interests,
+publications, news, CV, and a bilingual-ready blog — with a warm off-white palette
+and the bilingual **Chiron GoRound TC** typeface, so Latin and Hangul render with
+equal care. Built on **Hugo (Extended)**: no Node.js, no JS framework, no build
+step beyond the Hugo binary.
 
-## Features
+**[▶ Live demo](https://2ood.github.io/hugo-academic-portfolio/)** &nbsp;·&nbsp;
+MIT-licensed &nbsp;·&nbsp; static + free to host on GitHub Pages
 
-- **Multilingual** out of the box (English + Korean demo) with a header language
-  dropdown. Add or remove languages from config.
-- **Owner-configurable** from `config/_default/params.yaml` (or the admin dashboard):
-  identity and social links, a named **color palette**, and which **sections** appear.
-- **Light/dark mode** - a visitor toggle in the header, remembered per browser, with
-  no flash on load and respect for the OS preference.
-- **Content dashboard** at `/admin/` — schema-driven editors for publications, news,
-  CV, and research interests, a split Markdown editor for blog posts with
-  paste-to-upload images, and a **Site Settings** panel.
-- **Static + free to host** — GitHub Pages via GitHub Actions on push to `main`.
+---
 
-## Stack
+## Why this template
 
-- **Hugo (Extended)** — static site generator with native Sass compilation
-- **Go templates** + **SCSS** (one partial per page/component) + **YAML** data files
-- **Vanilla JS only** — filter tabs, mobile nav, image lightbox, theme toggle
-- **GitHub Pages** via GitHub Actions (`hugo --minify`)
+- **Dependency-light.** The build is the Hugo binary alone — no Node, no bundler,
+  no PostCSS. The optional content editor is a single zero-dependency Python file.
+- **Multilingual out of the box.** English + a Korean demo, a header language
+  dropdown, per-language content and UI strings. Add or drop languages in config.
+- **Owner-configurable without touching templates.** Identity, social links, a
+  named color palette, and which sections appear all live in one YAML file —
+  editable by hand or from the dashboard.
+- **Light/dark + named palettes.** A visitor toggle remembered per browser, no
+  flash on load, respecting the OS preference; four palettes via CSS custom properties.
+- **A browser content dashboard.** Schema-driven editors for publications, news,
+  CV, and research interests, plus a split Markdown editor with paste-to-upload
+  images — staged and flushed as clean, single commits to your repo.
+- **Free to host.** Minified static output to GitHub Pages via GitHub Actions on
+  every push to `main`.
 
-## Quick start
+## What's inside
 
-```bash
-hugo server          # live-reload preview at http://localhost:1313/
-hugo --minify        # production build into public/
-```
+| Section | What it shows |
+|---|---|
+| **Home** | Profile, bio, tagline, and a *Selected Publications* shortlist |
+| **Research Interests** | Themed interests, each with a summary and a dedicated page that auto-lists matching publications |
+| **Publications** | Filterable list (Conference / Workshop / Journal / Preprint) with paper, code, data, and project links, plus awards |
+| **News** | Dated, emoji-tagged announcements |
+| **CV** | Education, awards, academic service, and teaching — plus a downloadable PDF |
+| **Blog** | Markdown posts with tags, drafts, per-language siblings, and an image lightbox |
 
-Requires **Hugo Extended ≥ 0.146** (content adapters + native Sass). The theme uses
-CSS relative-color syntax, so visitors need a 2023+ browser (Chrome 119, Safari 16.4,
-Firefox 128).
+Every section can be toggled off in config, and each is bilingual-ready.
+
+## Quickstart (≈5 minutes)
+
+**Prerequisites:** [Hugo Extended](https://gohugo.io/installation/) ≥ 0.146
+(content adapters + native Sass). Python 3 only if you want the browser dashboard.
+Theming uses CSS relative-color syntax, so visitors need a 2023+ browser
+(Chrome 119, Safari 16.4, Firefox 128).
+
+1. **Get the template** — click *Use this template* on GitHub, or clone it:
+   ```bash
+   git clone <your-repo-url> && cd <repo>
+   ```
+2. **Personalize** — one prompt rewrites `hugo.toml` + `params.yaml` for you
+   (name, affiliation, social links, palette, Pages URL). No dependencies, and your
+   comments and language list are preserved:
+   ```bash
+   python init.py
+   ```
+   Prefer to edit by hand? Skip it and see [Make it yours](#make-it-yours).
+3. **Preview** — live-reloads as you edit:
+   ```bash
+   hugo server        # http://localhost:1313/
+   ```
+4. **Add your content** — edit the Markdown/YAML directly, or use the dashboard:
+   ```bash
+   python cms-server.py   # then open http://localhost:8787/
+   ```
+   Swap the demo bio in `content/_index.md`, the data in `data/en/*.yml`,
+   `static/images/profile.svg`, and `static/cv.pdf`.
+5. **Deploy** — set `baseURL` to your Pages URL, then push. GitHub Actions builds
+   with Hugo and publishes automatically:
+   ```bash
+   git push origin main
+   ```
+
+Result: a live academic site at `https://<you>.github.io/<repo>/`.
+
+> 📖 Want the hand-held version? **[QUICKSTART.md](QUICKSTART.md)** has full
+> walkthroughs — first deploy, writing a post, editing publications/news/CV,
+> adding a language, configuring from the dashboard, and the common gotchas
+> (like *deploy with GitHub Actions, not a branch*).
 
 ## Make it yours
 
-0. **Quick setup** — run `python init.py` once after cloning. It prompts for your
-   name, affiliation, social links, palette, and Pages URL, then rewrites
-   `hugo.toml` and `params.yaml` for you (no dependencies; comments and the
-   language list are preserved). Prefer to edit by hand? Skip it and do step 1.
-1. **Identity & structure** — `config/_default/hugo.toml`: set `baseURL`, `title`
-   (your name), and the language list. `config/_default/params.yaml`: set
-   `description`, `tagline`, social links, `palette`, and the `sections` toggles.
+For a hand-edited setup, or to go beyond what `init.py` covers:
+
+1. **Identity & structure** — in `config/_default/hugo.toml` set `baseURL`,
+   `title` (your name), and the language list. In `config/_default/params.yaml`
+   set `description`, `tagline`, social links, `palette`, and the `sections` toggles.
 2. **Content** — replace the placeholder data in `data/<lang>/*.yml`
    (publications, news, cv, research_interests), the bio in `content/_index.md`,
-   and the demo post in `content/blog/`. Swap `static/images/profile.svg` and
+   and the demo posts in `content/blog/`. Swap `static/images/profile.svg` and
    `static/cv.pdf` for your own.
 3. **Preview** with `hugo server`, then push to `main` to deploy.
 
@@ -76,7 +118,7 @@ Per-language overrides for `description`/`tagline` go in
 1. Add a `[languages.<lang>]` block in `config/_default/hugo.toml`.
 2. Copy `i18n/en.toml` to `i18n/<lang>.toml` and translate the values.
 3. Add `data/<lang>/*.yml` (copy from `data/en/`; keep `title` keys identical so
-   slugs and cross-links stay stable, translate the prose).
+   slugs and cross-links stay stable, then translate the prose).
 4. Add `<name>.<lang>.md` content siblings (e.g. `_index.<lang>.md`) and a
    `_content.<lang>.gotmpl` for the publications and research-interests sections.
 5. Update `LANGS` in `static/admin/admin.js` so the dashboard can edit the new
@@ -109,18 +151,16 @@ Two ways to edit content:
    button records your change, and a single **Commit (N)** button in the nav bar
    flushes the whole batch as **one** commit (it appears only when there are pending
    changes). The editor always reflects staged-but-uncommitted work, and you're warned
-   before leaving or signing out with pending changes. This keeps history clean — no
-   more one-commit-per-save (or per-auto-translated-file) noise.
+   before leaving or signing out with pending changes — keeping history clean.
 
    Each content editor has a **⤳ Translate from …** button that pulls the content
    from another language and loads a translation *into the editor you're in* (so
    you review it and save like any other edit — it never commits on its own),
    using the free, keyless [MyMemory](https://mymemory.translated.net) service
-   (client-side; works locally and on Pages). The source is the default language
-   (or the first other language when you're editing the default). It translates
-   only prose — titles, authors, venues, URLs, and slugs stay fixed — and protects
-   markdown. It only fills *empty* fields, so your hand-edits are never overwritten.
-   Treat the output as a draft to review (conventional MT, not an LLM).
+   (client-side; works locally and on Pages). It translates only prose — titles,
+   authors, venues, URLs, and slugs stay fixed — protects markdown, and fills only
+   *empty* fields so your hand-edits are never overwritten. Treat the output as a
+   draft to review (conventional MT, not an LLM).
 
    When the dashboard is served from GitHub Pages instead, it falls back to committing
    through the GitHub API using a **fine-grained token** scoped to the repo
@@ -130,6 +170,12 @@ Two ways to edit content:
    domains). Use a short token expiration — the dashboard also self-expires the stored
    token after 2 days. The dashboard's palette, light/dark mode, and UI language are
    adjustable from its header.
+
+## Deployment
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with Hugo
+Extended and publishes `public/` to GitHub Pages. Set `baseURL` in
+`config/_default/hugo.toml` to your Pages URL first.
 
 ## Project layout
 
@@ -144,14 +190,9 @@ assets/js/        main.js (fingerprinted at build for cache-busting)
 static/           Images, cv.pdf, and the /admin dashboard
 ```
 
-## Deployment
-
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with Hugo
-Extended and publishes `public/` to GitHub Pages. Set `baseURL` in
-`config/_default/hugo.toml` to your Pages URL first.
-
 ## Documentation
 
+- [QUICKSTART.md](QUICKSTART.md) — step-by-step walkthroughs for the common tasks
 - [CHANGELOG.md](CHANGELOG.md) — notable changes
 - [ROADMAP.md](ROADMAP.md) — direction and ideas
 
