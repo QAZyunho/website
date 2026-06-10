@@ -105,6 +105,13 @@ Two ways to edit content:
    posts. The **Settings** tab edits `config/_default/params.yaml` (palette, sections,
    social links). The local server only accepts loopback requests.
 
+   Each content editor has an **⤳ Auto-translate** button that fills the other
+   languages from what you're editing, using the free, keyless [MyMemory](https://mymemory.translated.net)
+   service (client-side; works locally and on Pages). It translates only prose —
+   titles, authors, venues, URLs, and slugs stay fixed — and protects markdown.
+   It only fills *missing* translations, so your hand-edits are never overwritten.
+   Treat the output as a draft to review (conventional MT, not an LLM).
+
    When the dashboard is served from GitHub Pages instead, it falls back to committing
    through the GitHub API using a **fine-grained token** scoped to the repo
    (Contents: read/write). Click **Authorize with GitHub** on the login screen to open

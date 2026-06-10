@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 ## [Unreleased]
 
 ### Added
+- **Dashboard auto-translation (free, keyless).** An "⤳ Auto-translate" button in
+  the Publications/News/CV, blog-post, and research-interest editors machine-
+  translates content into the site's other languages. Uses MyMemory entirely
+  client-side (no API key, no backend, CORS) so it works locally and on the
+  deployed Pages dashboard. It is **field-aware** (only prose is translated —
+  titles, authors, venues, URLs, dates, and slugs stay identical across
+  languages), **markdown-safe** (links/code/images/bare URLs kept verbatim;
+  `**bold**`/`*italic*`/`~~strike~~` markers preserved, inner text translated;
+  long text chunked under MyMemory's 500-byte limit), and **gap-fill by default**
+  so an existing hand-edited translation is never overwritten (it asks before a
+  full re-translate). Conventional MT yields a reviewable draft, not final prose.
 - **`init.py` — post-clone setup.** A zero-dependency, cross-platform Python
   prompt that personalizes `config/_default/hugo.toml` (title, baseURL) and
   `params.yaml` (affiliation, social links, palette, favicon). Surgical line
