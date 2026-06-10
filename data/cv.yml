@@ -1,13 +1,30 @@
+# Curriculum vitae data. Four optional sections — education, awards, service,
+# teaching — each rendered only if present. The cv-section partial detects the
+# section by a distinctive key (degree / course / role / title).
 education:
-  - institution: Gwangju Institute of Science and Technology (GIST)
-    degree: Data Science Lab, M.S. + Ph.D Integrated student
-    advisor: Advised by Prof. Sundong Kim
-    period: Present
-  - institution: Gwangju Institute of Science and Technology (GIST)
-    degree: B.S., Electrical Engineering and Computer Science
-    advisor: Advised by Prof. Sundong Kim
-    period: Mar 2020 - Feb 2026
+  - institution: Example University
+    degree: Ph.D. in Computer Science
+    advisor: Advised by Prof. Ada Lovelace
+    period: 2023 - Present
+  - institution: State University
+    degree: B.S. in Computer Science
+    period: 2019 - 2023
 awards:
-  - title: Great Thesis Award (2026)
-    year: 2026
-    description: Awarded for outstanding bachelor's thesis work in the field of AI at GIST.
+  - title: Outstanding Paper Award, NeurIPS
+    year: 2025
+  - title: Graduate Research Fellowship
+    year: 2023
+service:
+  - role: Reviewer
+    detail: NeurIPS, ICML, ICLR (2024 - 2025)
+  - role: Workshop Organizer
+    detail: Workshop on Reasoning, ICML 2025
+teaching:
+  - course: Introduction to Machine Learning (CS200)
+    role: Teaching Assistant
+    institution: Example University
+    period: 2024
+  - course: Data Structures (CS101)
+    role: Teaching Assistant
+    institution: State University
+    period: 2022

@@ -1,6 +1,6 @@
-baseURL = "https://2ood.github.io/ai-researcher/"
+baseURL = "https://username.github.io/your-repo/"
 locale = "en"
-title = "Kyungmin Choi"
+title = "Your Name"
 
 [taxonomies]
   tag = "tags"
@@ -15,10 +15,12 @@ title = "Kyungmin Choi"
       unsafe = true
 
 [params]
-  description = "AI Researcher · GIST Data Science Lab"
-  profileImage = "images/profile_square.png"
-  email = "youvegotmail@gm.gist.ac.kr"
-  googleScholar = "https://scholar.google.com/citations?user=T035RyUAAAAJ&hl=en"
-  github = "https://github.com/2ood"
-  linkedin = "https://linkedin.com/in/2ood"
+  description = "Ph.D. Candidate · Example University, Machine Learning Lab"
+  tagline = "Researching representation learning and out-of-distribution generalization."
+  faviconEmoji = "🌲"
+  profileImage = "images/profile.svg"
+  email = "you@example.com"
+  googleScholar = "https://scholar.google.com/"
+  github = "https://github.com/username"
+  linkedin = "https://linkedin.com/in/username"
   cvPdf = "cv.pdf"

@@ -5,8 +5,8 @@
  */
 
 // ---- Repository config ----------------------------------------------------
-const OWNER = '2ood';
-const REPO = 'ai-researcher';
+const OWNER = 'username';      // GitHub user/org — set for the deployed (GitHub API) fallback
+const REPO = 'your-repo';      // repository name
 const BRANCH = 'main';
 const API = 'https://api.github.com';
 const TOKEN_KEY = 'gh_token';

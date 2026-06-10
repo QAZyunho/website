@@ -1,6 +1,11 @@
 ---
 title: "Home"
 ---
-I am an AI researcher at the [Gwangju Institute of Science and Technology (GIST)](https://www.gist.ac.kr/), working in the [Data Science Lab](https://sundong.kim) under Prof. Sundong Kim. My research centers on abstract reasoning and analogy - building datasets and methods that align machine reasoning with human intuition (ARC-style tasks).
+I am a Ph.D. candidate at [Example University](https://example.com), working in the
+Machine Learning Lab under Prof. Ada Lovelace. My research centers on representation
+learning and out-of-distribution generalization — building methods that stay reliable
+when the world shifts away from the training distribution.
 
-I am broadly interested in the intersection of machine learning, reasoning, and the philosophy of science, and in what it takes to move from pattern recognition toward genuine, general intelligence.
+I am broadly interested in the foundations of machine learning and in applying it to
+problems in the natural sciences. This is placeholder text — replace it with your own
+short bio.

@@ -1,14 +1,21 @@
-- title: Abstract Reasoning & ARC
-  summary: How can machines acquire the kind of fluid, compositional reasoning that ARC-style tasks demand?
+# Each entry becomes a page at /research-interests/<slugified-title>/.
+# `details` is markdown and renders as the page body. A publication links here
+# when its `interest` field matches one of these titles exactly.
+- title: Representation Learning
+  summary: How can models learn representations that transfer across tasks and stay robust under distribution shift?
   details: |
-    The Abstraction and Reasoning Corpus (ARC) resists the pattern-matching that powers most modern models: each task is novel, few-shot, and solvable only by composing a small set of human-intuitive priors. I study how to give models
-    those priors explicitly and how to evaluate genuine reasoning rather than memorization. testing [link](/research-interests/)
-- title: Human-Intuitive Analogy
-  summary: Aligning a model's problem-solving with the analogies humans reach for first.
+    Placeholder description — replace with your own. Describe a research direction
+    in a paragraph or two: the question that drives it, why it matters, and how your
+    work approaches it. You can use **markdown**, [links](/publications/), and lists.
+- title: Out-of-Distribution Generalization
+  summary: Understanding when and why machine learning models fail outside their training distribution.
   details: |
-    People solve unfamiliar problems by mapping them onto familiar ones. My work (e.g. **GIFARC**) builds datasets and training signals that surface these analogies, so a model's first guess looks more like a human's - fewer brittle
-    shortcuts, more transferable structure.
-- title: Reasoning & the Philosophy of Science
-  summary: What the history of physics can teach us about interpreting learned representations.
+    Placeholder description — replace with your own. Models that look strong on
+    held-out test data often degrade sharply under real-world shift; this line of
+    work studies why, and what can be done about it.
+- title: Machine Learning for Science
+  summary: Adapting modern ML to accelerate discovery in the natural sciences.
   details: |
-    Deep learning often feels like an empirical science still waiting for its theory. I'm interested in what the conceptual upheavals of early quantum mechanics suggest about how we should interpret (and trust) the high-dimensional representations our models learn.
+    Placeholder description — replace with your own. Scientific problems bring
+    structure and constraints that general-purpose models rarely exploit; the goal
+    is methods that respect them.

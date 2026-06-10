@@ -1,21 +1,22 @@
 ---
-title: On the Philosophy of Science in AI
-date: 2024-06-10T12:00:00+09:00
+title: Welcome to the Blog
+date: 2025-01-01T09:00:00Z
 tags:
-  - philosophy
-  - machine learning
+  - meta
 draft: false
-description: A short reflection on how early 20th-century physics might inform our understanding of neural network representations.
+description: A first placeholder post — replace it with your own writing.
 ---
 
-Deep learning often feels like an empirical science waiting for its theoretical framework. When we train large models, we observe phenomena like grokking or double descent, and we try to retrofit explanations.
+This is a placeholder blog post. Write in Markdown: **bold**, *italic*, [links](/),
+lists, code blocks, blockquotes, and tables all render with sensible typographic
+defaults.
 
-In many ways, this mirrors the early days of quantum mechanics. Just as physicists had to invent new mathematical tools to describe the probabilistic nature of subatomic particles, we might need new forms of mathematics to fully describe the high-dimensional geometry of neural representations.
+```python
+def hello(name: str) -> str:
+    return f"Hello, {name}!"
+```
 
-This is just a placeholder post. I will write more on this topic in the future.
+> Paste an image with Ctrl+V in the local admin editor and it uploads automatically,
+> then opens in a click-to-zoom lightbox on the site.
 
-![Placeholder image. Botanic Garden.](/images/uploads/244792c2f065c36c.jpg)
-
-
-
-
+Delete this post when you're ready to publish your own.

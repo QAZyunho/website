@@ -15,7 +15,7 @@
   <div class="profile-bio">
     <h1>{{ site.Title }}</h1>
     <p class="affiliation">{{ site.Params.description }}</p>
-    <p class="one-liner">Researching abstract reasoning and human-intuitive AI in the GIST Data Science Lab.</p>
+    {{ with site.Params.tagline }}<p class="one-liner">{{ . }}</p>{{ end }}
     {{ with .Content }}<div class="bio">{{ . }}</div>{{ end }}
     <div class="social-links">
       <a href="mailto:{{ site.Params.email }}">Email</a>
