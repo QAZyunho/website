@@ -1,6 +1,7 @@
 baseURL = "https://username.github.io/your-repo/"
 locale = "en"
 title = "Your Name"
+defaultContentLanguage = "en"
 
 [taxonomies]
   tag = "tags"
@@ -24,3 +25,18 @@ title = "Your Name"
   github = "https://github.com/username"
   linkedin = "https://linkedin.com/in/username"
   cvPdf = "cv.pdf"
+
+# Languages. The default (defaultContentLanguage above) lives at /, others at /<lang>/.
+# Per-language `description`/`tagline` overrides go under [languages.<lang>.params].
+[languages]
+  [languages.en]
+    label = "English"
+    locale = "en"
+    weight = 1
+  [languages.ko]
+    label = "한국어"
+    locale = "ko"
+    weight = 2
+    [languages.ko.params]
+      description = "박사과정 · Example University, 머신러닝 연구실"
+      tagline = "표현 학습과 분포 외 일반화를 연구합니다."

@@ -1,0 +1,36 @@
+# 한국어 출판물. 제목/저자/학회는 슬러그·연결 안정성을 위해 영어(data/en)와 동일하게 유지하고,
+# `abstract` 등 산문만 번역하세요.
+- title: "Learning Robust Representations from Limited Supervision"
+  authors: "**Jane Doe**, John Smith, Alex Lee"
+  venue: "NeurIPS"
+  year: 2025
+  type: "Conference"
+  selected: true
+  award: "Outstanding Paper Award"
+  interest: "Representation Learning"
+  paperUrl: "https://example.com/paper"
+  codeUrl: "https://github.com/example/repo"
+  dataUrl: "https://example.com/dataset"
+  projectUrl: "https://example.com/project"
+  abstract: "자리표시자 초록입니다. 논문의 초록으로 바꾸세요 — 이 출판물의 전용 페이지 본문으로 렌더링됩니다."
+- title: "On the Generalization of Deep Networks Under Distribution Shift"
+  authors: "John Smith, **Jane Doe**"
+  venue: "Journal of Machine Learning Research"
+  year: 2024
+  type: "Journal"
+  selected: true
+  paperUrl: "https://example.com/paper"
+  codeUrl: "https://github.com/example/repo"
+- title: "A Simple Baseline for Few-Shot Reasoning"
+  authors: "**Jane Doe**, Maria Garcia"
+  venue: "ICML Workshop on Reasoning"
+  year: 2024
+  type: "Workshop"
+  paperUrl: "https://example.com/paper"
+- title: "Toward Interpretable Scientific Machine Learning"
+  authors: "**Jane Doe**, Wei Chen, Sofia Rossi"
+  venue: "arXiv"
+  year: 2025
+  type: "Preprint"
+  paperUrl: "https://arxiv.org/abs/0000.00000"
+  codeUrl: "https://github.com/example/repo"

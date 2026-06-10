@@ -1,0 +1,10 @@
+# 한국어 뉴스. 구조는 영어와 동일하게 두고 `text`만 번역하세요 (인라인 마크다운 링크 지원).
+- date: 2025-09-15
+  icon: 🎉
+  text: 견고한 표현 학습에 관한 논문이 [NeurIPS 2025](https://example.com)에 채택되었습니다.
+- date: 2025-06-01
+  icon: ✈️
+  text: ICML Workshop on Reasoning에서 발표합니다.
+- date: 2025-03-01
+  icon: 🎓
+  text: Example University 박사과정을 시작했습니다.
