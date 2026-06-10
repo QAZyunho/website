@@ -1,21 +1,13 @@
-# Owner-editable site settings. Edit these from the /admin dashboard (Site Settings)
-# or by hand — Hugo merges this file into site.Params. Per-language overrides for
-# description/tagline live in config/_default/hugo.toml under [languages.<lang>.params].
-
-description: "Ph.D. Candidate · Example University, Machine Learning Lab"
-tagline: "Researching representation learning and out-of-distribution generalization."
-faviconEmoji: "🌲"
-profileImage: "images/profile.svg"
-email: "you@example.com"
-googleScholar: "https://scholar.google.com/"
-github: "https://github.com/username"
-linkedin: "https://linkedin.com/in/username"
-cvPdf: "cv.pdf"
-
-# Color palette — see assets/scss/_theme.scss for the available names.
-palette: "forest"
-
-# Which sections appear in the navigation and on the home page.
+description: Ph.D. Candidate · Example University, Machine Learning Lab
+tagline: Researching representation learning and out-of-distribution generalization.
+faviconEmoji: 🌲
+profileImage: images/profile.svg
+email: you@example.com
+googleScholar: https://scholar.google.com/
+github: https://github.com/username
+linkedin: https://linkedin.com/in/username
+cvPdf: cv.pdf
+palette: slate
 sections:
   research: true
   publications: true
