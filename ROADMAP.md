@@ -5,11 +5,18 @@ High-level direction for the template. Notable changes live in
 
 ## Recently shipped
 **2026-06-11**
-- **Dashboard auto-translation** — a keyless, free "⤳ Auto-translate" button that
-  machine-translates content into the other languages (MyMemory, client-side, no
-  API key). Field-aware (prose only; titles/URLs/slugs stay fixed), markdown-safe
-  (protects links/code/images/emphasis), and gap-fill by default so hand-edited
-  translations are never overwritten.
+- **Bulk "Save & Exit" commit** — editor saves now *stage* in the browser instead of
+  committing one-by-one; a single **Commit (N)** button in the nav bar flushes the
+  whole batch as one commit (local mode via a new `/api/commit`; Pages via the GitHub
+  Git Data API). Reads overlay the staging area so editors/lists reflect uncommitted
+  work; `beforeunload` + sign-out guard pending edits. Ends the noisy one-commit-per-
+  save history. (Image pastes still commit immediately — hash-named/deduped.)
+- **Dashboard auto-translation** — a keyless, free "⤳ Translate from …" button that
+  pulls another language's content and machine-translates it *into the current
+  editor* (MyMemory, client-side, no API key); you review and save like any edit —
+  it never commits on its own. Field-aware (prose only; titles/URLs/slugs stay
+  fixed), markdown-safe (protects links/code/images/emphasis), and gap-fill by
+  default so hand-edits in the editor are never overwritten.
 
 **2026-06-10**
 - **`init.py`** — one-command post-clone personalization (rewrites `hugo.toml` +
@@ -20,11 +27,9 @@ High-level direction for the template. Notable changes live in
 - **Themed demo persona** — *Joomo Makguli* makgeolli-research demo content (EN/KO).
 
 ## Next up (next session)
-- [ ] **Bulk "Save & Exit" commit strategy** — the dashboard currently commits on
-      every save, producing noisy history (e.g. one commit per auto-translated file).
-      Stage edits in memory during a session and flush them as a single commit via a
-      global Save button in the nav bar that activates only when there are pending
-      changes.
+- [ ] **Grammar-check button** — alongside the per-editor ⤳ translate button, a
+      button that proofreads the current language's prose in place (keyless/free
+      where possible, same field-aware + markdown-safe handling as auto-translate).
 
 Onboarding polish (carried over):
 - [ ] **Quickstart guide with friendly snapshots** — a short, visual "get running in
@@ -39,12 +44,11 @@ Onboarding polish (carried over):
   themed demo persona). When packaging the template for reuse, reset `baseURL`,
   `params.yaml` identity, and `data/`+`content/` back to neutral placeholders (or
   document that `init.py` + the dashboard are the intended reset path).
-- The demo blog posts (`content/blog/first-post*.md`) were overwritten by an
-  auto-translate test run and now contain garbled MT output (e.g. EN
-  `**Bold**Intro * - Italic*Intro`). Restore clean demo prose before relying on
-  them as a showcase. (Lesson: translating single-word emphasis fragments like
-  "italic" through MyMemory yields junk — a future refinement could skip
-  too-short runs.)
+- `content/blog/first-post*.md` were cleaned up this session (garbled MT prose
+  removed via the dashboard). Spot-check the remaining demo posts (e.g.
+  `second-post*.md`) for leftover junk before relying on them as a showcase.
+  (Lesson: translating single-word emphasis fragments like "italic" through
+  MyMemory yields junk — a future refinement could skip too-short runs.)
 
 ## Ideas / possible improvements
 - [ ] More built-in palettes, and a small palette preview in the Settings dashboard.

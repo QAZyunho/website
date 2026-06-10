@@ -95,7 +95,7 @@ Two ways to edit content:
 
 1. **Directly** — edit the Markdown/YAML and commit.
 2. **Dashboard** — a zero-dependency Python backend that serves the editor and
-   commits each save to your **local** git repo (push in bulk when ready):
+   commits to your **local** git repo (push in bulk when ready):
 
    ```bash
    python cms-server.py     # then open http://localhost:8787/
@@ -105,11 +105,21 @@ Two ways to edit content:
    posts. The **Settings** tab edits `config/_default/params.yaml` (palette, sections,
    social links). The local server only accepts loopback requests.
 
-   Each content editor has an **⤳ Auto-translate** button that fills the other
-   languages from what you're editing, using the free, keyless [MyMemory](https://mymemory.translated.net)
-   service (client-side; works locally and on Pages). It translates only prose —
-   titles, authors, venues, URLs, and slugs stay fixed — and protects markdown.
-   It only fills *missing* translations, so your hand-edits are never overwritten.
+   Edits are **staged in the browser**, not committed one-by-one: each editor's Save
+   button records your change, and a single **Commit (N)** button in the nav bar
+   flushes the whole batch as **one** commit (it appears only when there are pending
+   changes). The editor always reflects staged-but-uncommitted work, and you're warned
+   before leaving or signing out with pending changes. This keeps history clean — no
+   more one-commit-per-save (or per-auto-translated-file) noise.
+
+   Each content editor has a **⤳ Translate from …** button that pulls the content
+   from another language and loads a translation *into the editor you're in* (so
+   you review it and save like any other edit — it never commits on its own),
+   using the free, keyless [MyMemory](https://mymemory.translated.net) service
+   (client-side; works locally and on Pages). The source is the default language
+   (or the first other language when you're editing the default). It translates
+   only prose — titles, authors, venues, URLs, and slugs stay fixed — and protects
+   markdown. It only fills *empty* fields, so your hand-edits are never overwritten.
    Treat the output as a draft to review (conventional MT, not an LLM).
 
    When the dashboard is served from GitHub Pages instead, it falls back to committing

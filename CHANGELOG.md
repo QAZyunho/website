@@ -6,17 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 ## [Unreleased]
 
 ### Added
-- **Dashboard auto-translation (free, keyless).** An "⤳ Auto-translate" button in
-  the Publications/News/CV, blog-post, and research-interest editors machine-
-  translates content into the site's other languages. Uses MyMemory entirely
-  client-side (no API key, no backend, CORS) so it works locally and on the
-  deployed Pages dashboard. It is **field-aware** (only prose is translated —
-  titles, authors, venues, URLs, dates, and slugs stay identical across
-  languages), **markdown-safe** (links/code/images/bare URLs kept verbatim;
-  `**bold**`/`*italic*`/`~~strike~~` markers preserved, inner text translated;
-  long text chunked under MyMemory's 500-byte limit), and **gap-fill by default**
-  so an existing hand-edited translation is never overwritten (it asks before a
-  full re-translate). Conventional MT yields a reviewable draft, not final prose.
+- **Dashboard bulk commit ("Save & Exit").** Editor saves now **stage** changes in
+  the browser instead of committing one-by-one; a single **Commit (N)** button in
+  the nav bar flushes the whole batch as **one** commit (shown only when there are
+  pending changes). Reads overlay the staging area, so editors and lists always
+  reflect staged-but-uncommitted work (a staged new post appears, a staged delete
+  disappears); a `beforeunload` and sign-out guard warn before discarding pending
+  edits. Local mode commits via a new `/api/commit` endpoint (one pathspec commit);
+  the deployed Pages dashboard builds the same single commit with the GitHub Git
+  Data API. Image pastes still commit immediately (hash-named, deduped). This ends
+  the noisy one-commit-per-save / per-auto-translated-file history.
+- **Dashboard auto-translation (free, keyless).** A "⤳ Translate from …" button in
+  the Publications/News/CV, blog-post, and research-interest editors pulls content
+  from another language and loads a machine translation **into the editor you're
+  in** — it never commits on its own, so you review the draft and save like any
+  other edit. The source is the default language (or the first other language when
+  you're editing the default). Uses MyMemory entirely client-side (no API key, no
+  backend, CORS) so it works locally and on the deployed Pages dashboard. It is
+  **field-aware** (only prose is translated — titles, authors, venues, URLs, dates,
+  and slugs stay identical across languages), **markdown-safe** (links/code/images/
+  bare URLs kept verbatim; `**bold**`/`*italic*`/`~~strike~~` markers preserved,
+  inner text translated; long text chunked under MyMemory's 500-byte limit), and
+  **gap-fill by default** so existing hand-edits in the editor are never overwritten
+  (it asks before a full re-translate). Conventional MT yields a reviewable draft,
+  not final prose.
 - **`init.py` — post-clone setup.** A zero-dependency, cross-platform Python
   prompt that personalizes `config/_default/hugo.toml` (title, baseURL) and
   `params.yaml` (affiliation, social links, palette, favicon). Surgical line
