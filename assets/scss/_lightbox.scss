@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   padding: $spacing-xl;
-  background: rgba($carbon, 0.88);
+  background: var(--c-scrim);
   cursor: zoom-out;
 
   // Fade via opacity (display can't transition). visibility is held until the

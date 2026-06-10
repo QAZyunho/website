@@ -9,6 +9,7 @@ nav_news = "소식"
 nav_cv = "이력서"
 menu = "메뉴"
 language = "언어"
+theme = "라이트/다크 테마 전환"
 
 # 섹션 제목 / 공용 라벨
 research_interests = "연구 관심사"

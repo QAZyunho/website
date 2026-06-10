@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   background: $porcelain;
-  border-bottom: 1px solid rgba($carbon, 0.1);
+  border-bottom: 1px solid var(--c-text-10);
   z-index: 100;
 }
 
@@ -56,7 +56,7 @@
   display: none;
   flex-direction: column;
   padding: $spacing-sm $spacing-lg $spacing-md;
-  border-top: 1px solid rgba($carbon, 0.1);
+  border-top: 1px solid var(--c-text-10);
 
   a {
     padding: $spacing-sm 0;
@@ -98,6 +98,20 @@
   a.active { color: $forest; font-weight: 500; }
 }
 
+/* Light/dark toggle (markup: layouts/partials/theme-toggle.html) */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: $carbon;
+
+  &:hover { color: $forest; }
+}
+
 /* Desktop: float the dropdown menu below the summary */
 @media (min-width: $mobile) {
   .lang-switch .lang-menu {
@@ -105,7 +119,7 @@
     right: 0;
     margin-top: $spacing-xs;
     background: $porcelain;
-    border: 1px solid rgba($carbon, 0.1);
+    border: 1px solid var(--c-text-10);
     padding: $spacing-sm;
     min-width: 7rem;
     z-index: 110;

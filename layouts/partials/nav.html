@@ -25,6 +25,7 @@
       {{ if ne (index $s "news") false }}<a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>{{ end }}
       {{ if ne (index $s "cv") false }}<a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>{{ end }}
       {{ partial "lang-switch.html" . }}
+      {{ partial "theme-toggle.html" . }}
     </nav>
 
     <button class="mobile-menu-btn" aria-label="{{ i18n "menu" }}" aria-expanded="false">
@@ -40,5 +41,6 @@
     {{ if ne (index $s "news") false }}<a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>{{ end }}
     {{ if ne (index $s "cv") false }}<a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>{{ end }}
     {{ partial "lang-switch.html" . }}
+    {{ partial "theme-toggle.html" . }}
   </nav>
 </header>

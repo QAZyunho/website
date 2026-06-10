@@ -10,6 +10,7 @@ nav_news = "News"
 nav_cv = "CV"
 menu = "Menu"
 language = "Language"
+theme = "Toggle light/dark theme"
 
 # Section headings / shared labels
 research_interests = "Research Interests"
