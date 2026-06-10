@@ -16,20 +16,22 @@ MIT-licensed &nbsp;·&nbsp; static + free to host on GitHub Pages
 
 ## Why this template
 
-- **Dependency-light.** The build is the Hugo binary alone — no Node, no bundler,
-  no PostCSS. The optional content editor is a single zero-dependency Python file.
+- **Zero Coding Maintenance: Owner-configurable without touching templates.** Identity, social links, a
+  named color palette, and which sections appear all live in one YAML file —
+  editable by hand or from the dashboard. No need to learn frontend whatsoever.
+- **Native Mobile Support : Responsive layout.** You can read the contents beautifully on small viewports. 
 - **Multilingual out of the box.** English + a Korean demo, a header language
   dropdown, per-language content and UI strings. Add or drop languages in config.
-- **Owner-configurable without touching templates.** Identity, social links, a
-  named color palette, and which sections appear all live in one YAML file —
-  editable by hand or from the dashboard.
-- **Light/dark + named palettes.** A visitor toggle remembered per browser, no
-  flash on load, respecting the OS preference; four palettes via CSS custom properties.
+- **Free to host.** Minified static output to GitHub Pages via GitHub Actions on
+  every push to `main`.
 - **A browser content dashboard.** Schema-driven editors for publications, news,
   CV, and research interests, plus a split Markdown editor with paste-to-upload
   images — staged and flushed as clean, single commits to your repo.
-- **Free to host.** Minified static output to GitHub Pages via GitHub Actions on
-  every push to `main`.
+- **Dependency-light.** The build is the Hugo binary alone — no Node, no bundler,
+  no PostCSS. The optional content editor is a single zero-dependency Python file.
+- **Light/dark + named palettes.** A visitor toggle remembered per browser, no
+  flash on load, respecting the OS preference; four palettes via CSS custom properties.
+
 
 ## What's inside
 
