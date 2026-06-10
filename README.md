@@ -11,6 +11,7 @@ step beyond the Hugo binary.
 **[▶ Live demo](https://2ood.github.io/hugo-academic-portfolio/)** &nbsp;·&nbsp;
 MIT-licensed &nbsp;·&nbsp; static + free to host on GitHub Pages
 
+![](/static/images/screenshot_front.png)
 ---
 
 ## Why this template
@@ -132,6 +133,8 @@ choice sets `data-theme`. Add a palette by adding a `[data-palette="name"]` bloc
 listing the name in `PALETTES` in `static/admin/admin.js`.
 
 ## The content dashboard (`/admin/`)
+
+![](static/images/screenshot_dashboard.png)
 
 Two ways to edit content:
 
