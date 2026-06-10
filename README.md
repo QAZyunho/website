@@ -132,6 +132,14 @@ The owner-selected `palette` sets `data-palette` on `<html>`; the visitor's ligh
 choice sets `data-theme`. Add a palette by adding a `[data-palette="name"]` block and
 listing the name in `PALETTES` in `static/admin/admin.js`.
 
+Predefined options are :
+
+|Forest|Slate|
+|-----|-----|
+| ![](static/images/screenshot_forest.png) | ![](static/images/screenshot_slate.png) |
+|Crimson|Plum|
+| ![](static/images/screenshot_crimson.png) | ![](static/images/screenshot_plum.png) |
+
 ## The content dashboard (`/admin/`)
 
 ![](static/images/screenshot_dashboard.png)
