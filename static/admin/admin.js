@@ -13,6 +13,15 @@ const TOKEN_KEY = 'gh_token';
 const TOKEN_EXP_KEY = 'gh_token_exp';
 const TOKEN_TTL_MS = 2 * 24 * 60 * 60 * 1000; // localStorage token self-expires after 2 days
 
+// ---- Site config ----------------------------------------------------------
+// Keep LANGS / DEFAULT_LANG in sync with config/_default/hugo.toml [languages].
+// PALETTES must match the named palettes in assets/scss/_theme.scss.
+const LANGS = ['en', 'ko'];
+const DEFAULT_LANG = 'en';
+const PALETTES = ['forest', 'slate', 'crimson', 'plum'];
+const PARAMS_FILE = 'config/_default/params.yaml';
+const SECTION_KEYS = ['research', 'publications', 'blog', 'news', 'cv'];
+
 // YAML: JSON schema keeps dates/ids as strings (no surprise Date objects) and ints as numbers.
 const Y_SCHEMA = jsyaml.JSON_SCHEMA;
 const Y_DUMP = { schema: Y_SCHEMA, lineWidth: -1, noRefs: true };
@@ -21,6 +30,7 @@ const Y_DUMP = { schema: Y_SCHEMA, lineWidth: -1, noRefs: true };
 const state = {
   token: '',       // set from loadToken() in init()
   local: false,    // true when served by cms-server.go (commits locally, no token)
+  lang: DEFAULT_LANG, // active content language for data/blog editors
   section: 'blog',
   model: null,     // parsed YAML for the active data file
   sha: null,       // sha of the active file (data editor or blog post)
@@ -28,7 +38,12 @@ const state = {
   interestTitles: [], // interest titles, for the publications "interest" dropdown
   interests: [],   // parsed research_interests.yml list (interests editor)
   interestsSha: null, // sha of research_interests.yml
+  settings: null,  // parsed config/_default/params.yaml (settings editor)
+  settingsSha: null,
 };
+
+// data/<lang>/<name> path for the active content language.
+function dataPath(name) { return `data/${state.lang}/${name}`; }
 
 // ---- Elements -------------------------------------------------------------
 const el = {
@@ -42,6 +57,7 @@ const el = {
   nav: document.getElementById('section-nav'),
   view: document.getElementById('view'),
   toast: document.getElementById('toast'),
+  langSelect: document.getElementById('lang-select'),
 };
 
 // ---- Utilities ------------------------------------------------------------
@@ -219,7 +235,7 @@ const EMOJIS = [
 
 const EDITORS = {
   publications: {
-    file: 'data/publications.yml', label: 'Publications', root: 'list',
+    data: 'publications.yml', label: 'Publications', root: 'list',
     fields: [
       { key: 'title', type: 'text', label: 'Title' },
       { key: 'authors', type: 'text', label: 'Authors (wrap your name in **double asterisks** to bold)' },
@@ -237,7 +253,7 @@ const EDITORS = {
     ],
   },
   news: {
-    file: 'data/news.yml', label: 'News', root: 'list',
+    data: 'news.yml', label: 'News', root: 'list',
     fields: [
       { key: 'date', type: 'text', label: 'Date (YYYY-MM-DD)' },
       { key: 'icon', type: 'emoji', label: 'Icon (emoji)' },
@@ -245,7 +261,7 @@ const EDITORS = {
     ],
   },
   cv: {
-    file: 'data/cv.yml', label: 'CV', root: 'record',
+    data: 'cv.yml', label: 'CV', root: 'record',
     fields: [
       { key: 'education', type: 'list', label: 'Education', fields: [
         { key: 'institution', type: 'text', label: 'Institution' },
@@ -396,28 +412,30 @@ async function loadDataEditor(section) {
   const cfg = EDITORS[section];
   try {
     if (section === 'publications') {
-      // Populate the "interest" dropdown from data/research_interests.yml.
+      // Populate the "interest" dropdown from this language's research_interests.yml.
       try {
-        const ri = await getFile('data/research_interests.yml');
+        const ri = await getFile(dataPath('research_interests.yml'));
         state.interestTitles = (jsyaml.load(ri.text, { schema: Y_SCHEMA }) || [])
           .map(x => x && x.title).filter(Boolean);
       } catch (e) { state.interestTitles = []; }
     }
-    const { text, sha } = await getFile(cfg.file);
+    const path = dataPath(cfg.data);
+    const { text, sha } = await getFile(path);
     state.model = jsyaml.load(text, { schema: Y_SCHEMA }) || (cfg.root === 'list' ? [] : {});
     state.sha = sha;
-    state.path = cfg.file;
+    state.path = path;
     renderDataEditor(section);
   } catch (e) {
-    el.view.innerHTML = `<p class="error">Failed to load ${esc(cfg.file)}: ${esc(e.message)}</p>`;
+    el.view.innerHTML = `<p class="error">Failed to load ${esc(dataPath(cfg.data))}: ${esc(e.message)}</p>`;
   }
 }
 async function saveDataFile() {
   const cfg = EDITORS[state.section];
+  const path = dataPath(cfg.data);
   const yaml = jsyaml.dump(state.model, Y_DUMP);
   try {
-    state.sha = await putFile(cfg.file, yaml, `content(admin): update ${cfg.file}`, state.sha);
-    toast('Saved ' + cfg.file, 'ok');
+    state.sha = await putFile(path, yaml, `content(admin): update ${path}`, state.sha);
+    toast('Saved ' + path, 'ok');
   } catch (e) {
     toast('Save failed: ' + e.message, 'error');
   }
@@ -427,6 +445,19 @@ async function saveDataFile() {
 //  Blog editor
 // ===========================================================================
 const BLOG_DIR = 'content/blog';
+
+// Blog posts are translated by filename: "slug.md" is the default language,
+// "slug.<lang>.md" is a translation. Detect a post's language and filter by it.
+function postLang(name) {
+  const m = name.match(/\.([a-z]{2})\.md$/);
+  return m ? m[1] : DEFAULT_LANG;
+}
+function isPostForLang(name) {
+  return name.endsWith('.md') && !name.startsWith('_index') && postLang(name) === state.lang;
+}
+function blogFileName(slug) {
+  return state.lang === DEFAULT_LANG ? `${slug}.md` : `${slug}.${state.lang}.md`;
+}
 
 // Shared full-width markdown editor: rendered preview (left) + textarea (right).
 // Reuses #f-body / #preview, so only one such editor is on screen at a time.
@@ -539,7 +570,7 @@ async function loadBlogList() {
   try {
     const items = await listDir(BLOG_DIR);
     const posts = items
-      .filter(f => f.type === 'file' && f.name.endsWith('.md') && f.name !== '_index.md')
+      .filter(f => f.type === 'file' && isPostForLang(f.name))
       .sort((a, b) => b.name.localeCompare(a.name));
     const rows = posts.map(p => `
       <div class="row">
@@ -584,7 +615,7 @@ async function openBlogEditor(path) {
       fm = Object.assign(fm, parsed.fm);
       body = parsed.body;
       sha = file.sha;
-      filename = path.split('/').pop().replace(/\.md$/, '');
+      filename = path.split('/').pop().replace(/(\.[a-z]{2})?\.md$/, '');
     } catch (e) {
       el.view.innerHTML = `<p class="error">Failed to load post: ${esc(e.message)}</p>`;
       return;
@@ -642,7 +673,7 @@ async function savePost(path, sha) {
     description: document.getElementById('f-desc').value.trim(),
   };
   const body = document.getElementById('f-body').value;
-  const filePath = path || `${BLOG_DIR}/${name}.md`;
+  const filePath = path || `${BLOG_DIR}/${blogFileName(name)}`;
   const text = buildPost(fm, body);
 
   try {
@@ -668,17 +699,17 @@ async function removePost(path, sha, name) {
 // ===========================================================================
 //  Research Interests (list + split markdown editor, like the blog)
 // ===========================================================================
-const INTERESTS_FILE = 'data/research_interests.yml';
+const INTERESTS_NAME = 'research_interests.yml';
 
 async function loadInterestsList() {
   el.view.classList.remove('view--wide');
   el.view.innerHTML = `<p class="loading">Loading…</p>`;
   try {
-    const { text, sha } = await getFile(INTERESTS_FILE);
+    const { text, sha } = await getFile(dataPath(INTERESTS_NAME));
     state.interests = jsyaml.load(text, { schema: Y_SCHEMA }) || [];
     state.interestsSha = sha;
   } catch (e) {
-    el.view.innerHTML = `<p class="error">Failed to load ${esc(INTERESTS_FILE)}: ${esc(e.message)}</p>`;
+    el.view.innerHTML = `<p class="error">Failed to load ${esc(dataPath(INTERESTS_NAME))}: ${esc(e.message)}</p>`;
     return;
   }
   const rows = state.interests.map((it, i) => `
@@ -745,8 +776,8 @@ async function saveInterest(index) {
   else state.interests[index] = entry;
   try {
     const yaml = jsyaml.dump(state.interests, Y_DUMP);
-    state.interestsSha = await putFile(INTERESTS_FILE, yaml, `content(admin): update ${INTERESTS_FILE}`, state.interestsSha);
-    toast('Saved ' + INTERESTS_FILE, 'ok');
+    state.interestsSha = await putFile(dataPath(INTERESTS_NAME), yaml, `content(admin): update ${dataPath(INTERESTS_NAME)}`, state.interestsSha);
+    toast('Saved ' + dataPath(INTERESTS_NAME), 'ok');
     loadInterestsList();
   } catch (e) {
     toast('Save failed: ' + e.message, 'error');
@@ -759,7 +790,7 @@ async function removeInterest(index) {
   state.interests.splice(index, 1);
   try {
     const yaml = jsyaml.dump(state.interests, Y_DUMP);
-    state.interestsSha = await putFile(INTERESTS_FILE, yaml, `content(admin): update ${INTERESTS_FILE}`, state.interestsSha);
+    state.interestsSha = await putFile(dataPath(INTERESTS_NAME), yaml, `content(admin): update ${dataPath(INTERESTS_NAME)}`, state.interestsSha);
     toast('Deleted', 'ok');
   } catch (e) {
     toast('Delete failed: ' + e.message, 'error');
@@ -768,13 +799,90 @@ async function removeInterest(index) {
 }
 
 // ===========================================================================
+//  Site Settings (config/_default/params.yaml)
+// ===========================================================================
+const SETTINGS_TEXT = [
+  ['description', 'Affiliation / description (shown under your name)'],
+  ['tagline', 'Tagline (one-liner)'],
+  ['faviconEmoji', 'Favicon emoji'],
+  ['profileImage', 'Profile image path'],
+  ['email', 'Email'],
+  ['googleScholar', 'Google Scholar URL'],
+  ['github', 'GitHub URL'],
+  ['linkedin', 'LinkedIn URL'],
+  ['cvPdf', 'CV PDF path'],
+];
+
+async function loadSettings() {
+  el.view.classList.remove('view--wide');
+  el.view.innerHTML = `<p class="loading">Loading…</p>`;
+  try {
+    const { text, sha } = await getFile(PARAMS_FILE);
+    state.settings = jsyaml.load(text, { schema: Y_SCHEMA }) || {};
+    state.settingsSha = sha;
+    renderSettings();
+  } catch (e) {
+    el.view.innerHTML = `<p class="error">Failed to load ${esc(PARAMS_FILE)}: ${esc(e.message)}</p>`;
+  }
+}
+
+function renderSettings() {
+  const m = state.settings || {};
+  const text = SETTINGS_TEXT.map(([k, label]) =>
+    `<div class="field"><label>${esc(label)}</label>
+      <input type="text" data-skey="${k}" value="${esc(m[k] == null ? '' : m[k])}"></div>`).join('');
+  const palette = `<div class="field"><label>Color palette</label>
+    <select data-skey="palette">${PALETTES.map(p =>
+      `<option value="${p}"${p === (m.palette || 'forest') ? ' selected' : ''}>${esc(p)}</option>`).join('')}</select></div>`;
+  const sec = m.sections || {};
+  const sections = SECTION_KEYS.map(k =>
+    `<div class="field field--inline">
+      <input type="checkbox" data-ssection="${k}"${sec[k] !== false ? ' checked' : ''}>
+      <label>${esc(k)}</label></div>`).join('');
+
+  el.view.innerHTML = `
+    <div class="view-head">
+      <h2>Site Settings</h2>
+      <div class="view-actions"><button id="save-settings" class="btn btn--primary">Save settings</button></div>
+    </div>
+    <p class="settings-note">Edits <code>${esc(PARAMS_FILE)}</code>. Your name (site title), baseURL, and the
+      language list live in <code>config/_default/hugo.toml</code> and are edited by hand. Saving rewrites the
+      file and drops its comments.</p>
+    <div class="settings-grid">${text}${palette}</div>
+    <h3 class="settings-subhead">Sections (navigation &amp; home)</h3>
+    <div class="settings-sections">${sections}</div>
+    <div class="sticky-actions"><button id="save-settings-2" class="btn btn--primary">Save settings</button></div>`;
+
+  document.getElementById('save-settings').addEventListener('click', saveSettings);
+  document.getElementById('save-settings-2').addEventListener('click', saveSettings);
+}
+
+async function saveSettings() {
+  const m = state.settings || {};
+  el.view.querySelectorAll('[data-skey]').forEach(inp => { m[inp.dataset.skey] = inp.value; });
+  m.sections = m.sections || {};
+  el.view.querySelectorAll('[data-ssection]').forEach(cb => { m.sections[cb.dataset.ssection] = cb.checked; });
+  state.settings = m;
+  try {
+    const yaml = jsyaml.dump(m, Y_DUMP);
+    state.settingsSha = await putFile(PARAMS_FILE, yaml, 'chore(admin): update site settings', state.settingsSha);
+    toast('Saved site settings', 'ok');
+  } catch (e) {
+    toast('Save failed: ' + e.message, 'error');
+  }
+}
+
+// ===========================================================================
 //  Routing / init
 // ===========================================================================
 function selectSection(section) {
   state.section = section;
   el.nav.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.section === section));
+  // The language selector applies to content editors, not the shared settings.
+  el.langSelect.classList.toggle('hidden', section === 'settings' || LANGS.length < 2);
   if (section === 'blog') loadBlogList();
   else if (section === 'research_interests') loadInterestsList();
+  else if (section === 'settings') loadSettings();
   else loadDataEditor(section);
 }
 function showApp() {
@@ -790,6 +898,14 @@ async function init() {
   el.signout.addEventListener('click', signout);
   el.nav.querySelectorAll('.tab').forEach(t =>
     t.addEventListener('click', () => selectSection(t.dataset.section)));
+
+  // Content-language selector (drives data/<lang>/ and blog filename suffixes).
+  el.langSelect.innerHTML = LANGS.map(l => `<option value="${l}">${l.toUpperCase()}</option>`).join('');
+  el.langSelect.value = state.lang;
+  el.langSelect.addEventListener('change', () => {
+    state.lang = el.langSelect.value;
+    if (state.section && state.section !== 'settings') selectSection(state.section);
+  });
 
   // Served by the local backend? Then commit locally and skip the token login.
   try {

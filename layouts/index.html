@@ -7,6 +7,7 @@
 */}}
 {{ define "main" }}
 {{ $data := index hugo.Data site.Language.Lang }}
+{{ $s := site.Params.sections | default dict }}
 
 {{/* ---- Profile hero ---- */}}
 <section class="profile-section">
@@ -29,6 +30,7 @@
 </section>
 
 {{/* ---- Research interests ---- */}}
+{{ if ne (index $s "research") false }}
 <section class="home-section">
   <h2>{{ i18n "research_interests" }}</h2>
   <div class="interests-list">
@@ -41,8 +43,10 @@
   </div>
   <a href="{{ "research-interests/" | relLangURL }}" class="see-all-link">{{ i18n "all_research_interests" }}</a>
 </section>
+{{ end }}
 
 {{/* ---- Publications (flat list of entries flagged selected: true) ---- */}}
+{{ if ne (index $s "publications") false }}
 <section class="home-section">
   <h2>{{ i18n "publications" }}</h2>
   <ul class="selected-pubs">
@@ -56,8 +60,10 @@
   </ul>
   <a href="{{ "publications/" | relLangURL }}" class="see-all-link">{{ i18n "see_all_publications" }}</a>
 </section>
+{{ end }}
 
 {{/* ---- News (latest 5) ---- */}}
+{{ if ne (index $s "news") false }}
 <section class="home-section">
   <h2>{{ i18n "news" }}</h2>
   <div class="news-list">
@@ -67,8 +73,10 @@
   </div>
   <a href="{{ "news/" | relLangURL }}" class="see-all-link">{{ i18n "see_all_news" }}</a>
 </section>
+{{ end }}
 
 {{/* ---- CV summary: education + awards ---- */}}
+{{ if ne (index $s "cv") false }}
 <section class="home-section">
   <h2>{{ i18n "cv" }}</h2>
   <div class="cv-subsection">
@@ -90,5 +98,6 @@
   </div>
   <a href="{{ "cv/" | relLangURL }}" class="see-all-link">{{ i18n "full_cv" }}</a>
 </section>
+{{ end }}
 
 {{ end }}

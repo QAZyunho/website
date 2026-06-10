@@ -1,3 +1,6 @@
+# Structural site configuration. Owner-editable settings (identity, social links,
+# palette, enabled sections) live in params.yaml so the /admin dashboard can edit
+# them as YAML. Per-language param overrides stay here under [languages.<lang>.params].
 baseURL = "https://username.github.io/your-repo/"
 locale = "en"
 title = "Your Name"
@@ -15,19 +18,7 @@ defaultContentLanguage = "en"
     [markup.goldmark.renderer]
       unsafe = true
 
-[params]
-  description = "Ph.D. Candidate · Example University, Machine Learning Lab"
-  tagline = "Researching representation learning and out-of-distribution generalization."
-  faviconEmoji = "🌲"
-  profileImage = "images/profile.svg"
-  email = "you@example.com"
-  googleScholar = "https://scholar.google.com/"
-  github = "https://github.com/username"
-  linkedin = "https://linkedin.com/in/username"
-  cvPdf = "cv.pdf"
-
 # Languages. The default (defaultContentLanguage above) lives at /, others at /<lang>/.
-# Per-language `description`/`tagline` overrides go under [languages.<lang>.params].
 [languages]
   [languages.en]
     label = "English"

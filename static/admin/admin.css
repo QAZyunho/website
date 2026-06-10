@@ -193,6 +193,23 @@ code {
 .field-row { display: flex; gap: 1rem; flex-wrap: wrap; }
 .field-row > .field { flex: 1; min-width: 160px; }
 
+/* ---- Content-language selector + Site Settings ---- */
+.lang-select {
+  font: inherit;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid rgba(27, 27, 27, 0.2);
+  border-radius: 4px;
+  background: var(--porcelain);
+  color: var(--carbon);
+}
+.settings-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.25rem; }
+.settings-grid .field:first-child { grid-column: 1 / -1; }
+.settings-subhead { font-size: 1rem; margin: 1rem 0 0.75rem; color: var(--walnut); }
+.settings-sections { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.settings-sections .field { margin-bottom: 0.5rem; }
+@media (max-width: 600px) { .settings-grid { grid-template-columns: 1fr; } }
+
 /* ---- Emoji picker (News icon) ---- */
 .emoji-field { position: relative; display: flex; gap: 0.5rem; align-items: center; }
 .emoji-field input { width: auto !important; flex: 1 1 160px; }

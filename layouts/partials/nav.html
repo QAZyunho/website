@@ -1,6 +1,7 @@
 {{/*
   Sticky top navigation. Active state: Home is exact (.IsHome); every other link
   is active when the current page URL is under that link's URL (hasPrefix).
+  Each section link renders unless params.sections.<name> is explicitly false.
   The language switcher (partials/lang-switch.html) renders only when more than
   one language is configured.
 */}}
@@ -10,6 +11,7 @@
 {{ $blog := "blog/" | relLangURL }}
 {{ $news := "news/" | relLangURL }}
 {{ $cv := "cv/" | relLangURL }}
+{{ $s := site.Params.sections | default dict }}
 
 <header class="site-header">
   <div class="container nav-container">
@@ -17,11 +19,11 @@
 
     <nav class="nav-links">
       <a href="{{ site.Home.RelPermalink }}" {{ if .IsHome }}class="active"{{ end }}>{{ i18n "nav_home" }}</a>
-      <a href="{{ $research }}" {{ if hasPrefix $cur $research }}class="active"{{ end }}>{{ i18n "nav_research" }}</a>
-      <a href="{{ $pubs }}" {{ if hasPrefix $cur $pubs }}class="active"{{ end }}>{{ i18n "nav_publications" }}</a>
-      <a href="{{ $blog }}" {{ if hasPrefix $cur $blog }}class="active"{{ end }}>{{ i18n "nav_blog" }}</a>
-      <a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>
-      <a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>
+      {{ if ne (index $s "research") false }}<a href="{{ $research }}" {{ if hasPrefix $cur $research }}class="active"{{ end }}>{{ i18n "nav_research" }}</a>{{ end }}
+      {{ if ne (index $s "publications") false }}<a href="{{ $pubs }}" {{ if hasPrefix $cur $pubs }}class="active"{{ end }}>{{ i18n "nav_publications" }}</a>{{ end }}
+      {{ if ne (index $s "blog") false }}<a href="{{ $blog }}" {{ if hasPrefix $cur $blog }}class="active"{{ end }}>{{ i18n "nav_blog" }}</a>{{ end }}
+      {{ if ne (index $s "news") false }}<a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>{{ end }}
+      {{ if ne (index $s "cv") false }}<a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>{{ end }}
       {{ partial "lang-switch.html" . }}
     </nav>
 
@@ -32,11 +34,11 @@
 
   <nav class="mobile-nav">
     <a href="{{ site.Home.RelPermalink }}" {{ if .IsHome }}class="active"{{ end }}>{{ i18n "nav_home" }}</a>
-    <a href="{{ $research }}" {{ if hasPrefix $cur $research }}class="active"{{ end }}>{{ i18n "nav_research" }}</a>
-    <a href="{{ $pubs }}" {{ if hasPrefix $cur $pubs }}class="active"{{ end }}>{{ i18n "nav_publications" }}</a>
-    <a href="{{ $blog }}" {{ if hasPrefix $cur $blog }}class="active"{{ end }}>{{ i18n "nav_blog" }}</a>
-    <a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>
-    <a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>
+    {{ if ne (index $s "research") false }}<a href="{{ $research }}" {{ if hasPrefix $cur $research }}class="active"{{ end }}>{{ i18n "nav_research" }}</a>{{ end }}
+    {{ if ne (index $s "publications") false }}<a href="{{ $pubs }}" {{ if hasPrefix $cur $pubs }}class="active"{{ end }}>{{ i18n "nav_publications" }}</a>{{ end }}
+    {{ if ne (index $s "blog") false }}<a href="{{ $blog }}" {{ if hasPrefix $cur $blog }}class="active"{{ end }}>{{ i18n "nav_blog" }}</a>{{ end }}
+    {{ if ne (index $s "news") false }}<a href="{{ $news }}" {{ if hasPrefix $cur $news }}class="active"{{ end }}>{{ i18n "nav_news" }}</a>{{ end }}
+    {{ if ne (index $s "cv") false }}<a href="{{ $cv }}" {{ if hasPrefix $cur $cv }}class="active"{{ end }}>{{ i18n "nav_cv" }}</a>{{ end }}
     {{ partial "lang-switch.html" . }}
   </nav>
 </header>
