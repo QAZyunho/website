@@ -3,6 +3,38 @@
 All notable changes to this template are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com).
 
+## [Unreleased]
+
+### Added
+- **`init.py` — post-clone setup.** A zero-dependency, cross-platform Python
+  prompt that personalizes `config/_default/hugo.toml` (title, baseURL) and
+  `params.yaml` (affiliation, social links, palette, favicon). Surgical line
+  edits — comments, structure, and the language list are preserved; re-runnable.
+- **Dashboard: "Authorize with GitHub".** A login button that deep-links to
+  GitHub's fine-grained token page pre-filled (name/description), then the user
+  pastes the scoped token back. Stays backendless (a static site can't run the
+  OAuth secret exchange).
+- **Dashboard palette, light/dark, and i18n.** The admin chrome now mirrors the
+  site's `data-palette` (read from `params.yaml`) and `data-theme` (shares the
+  site's `theme` choice via a header toggle, pre-paint so there's no flash), and
+  its own UI strings are translatable (EN/KO) via a dashboard-language switch.
+- **Labeled language selectors.** The two header dropdowns are now captioned
+  **Display** (dashboard chrome) vs **Content** (which language you're editing),
+  so they're no longer ambiguous; captions follow the display language.
+- **Dashboard favicon.** The admin page uses the same emoji favicon as the site
+  (`params.faviconEmoji`, default 🌲).
+
+### Changed
+- **Cache-busting JS.** `main.js` moved to `assets/js/` and is fingerprinted in
+  `baseof.html` (content-hashed URL, like the CSS), so a deploy invalidates the
+  browser cache for it immediately. (GitHub Pages still imposes its own ~10-min
+  CDN cache on the HTML itself, which the repo can't override.)
+- **Themed demo content.** The placeholder persona is now a coherent, playful
+  demo — *Joomo Makguli*, a makgeolli-fermentation researcher at Jumak National
+  University — across the bio, research interests, publications, news, CV, and
+  blog (EN + KO). Shows off the template with real cross-links intact rather than
+  generic lorem-ipsum.
+
 ## [1.0.0] — Initial template release
 
 The portfolio, generalized into a reusable Hugo template.

@@ -42,6 +42,10 @@ Firefox 128).
 
 ## Make it yours
 
+0. **Quick setup** — run `python init.py` once after cloning. It prompts for your
+   name, affiliation, social links, palette, and Pages URL, then rewrites
+   `hugo.toml` and `params.yaml` for you (no dependencies; comments and the
+   language list are preserved). Prefer to edit by hand? Skip it and do step 1.
 1. **Identity & structure** — `config/_default/hugo.toml`: set `baseURL`, `title`
    (your name), and the language list. `config/_default/params.yaml`: set
    `description`, `tagline`, social links, `palette`, and the `sections` toggles.
@@ -103,8 +107,12 @@ Two ways to edit content:
 
    When the dashboard is served from GitHub Pages instead, it falls back to committing
    through the GitHub API using a **fine-grained token** scoped to the repo
-   (Contents: read/write); set `OWNER`/`REPO` in `static/admin/admin.js`. Use a short
-   token expiration — the dashboard also self-expires the stored token after 2 days.
+   (Contents: read/write). Click **Authorize with GitHub** on the login screen to open
+   GitHub's token page pre-filled, then paste the token back. Owner/repo are detected
+   from the Pages URL (override `OWNER`/`REPO` in `static/admin/admin.js` for custom
+   domains). Use a short token expiration — the dashboard also self-expires the stored
+   token after 2 days. The dashboard's palette, light/dark mode, and UI language are
+   adjustable from its header.
 
 ## Project layout
 
@@ -115,7 +123,8 @@ data/<lang>/      Per-language structured content (publications, news, cv, inter
 i18n/             UI string bundles (en.toml, ko.toml, …)
 layouts/          Go templates — shell, per-section views, partials, render hooks
 assets/scss/      main.scss entry, _variables.scss, _theme.scss tokens, per-component partials
-static/           Images, cv.pdf, vanilla JS, and the /admin dashboard
+assets/js/        main.js (fingerprinted at build for cache-busting)
+static/           Images, cv.pdf, and the /admin dashboard
 ```
 
 ## Deployment
