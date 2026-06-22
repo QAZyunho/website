@@ -4,7 +4,18 @@ High-level direction for the template. Notable changes live in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Recently shipped
-**2026-06-22**
+**2026-06-22 (on branch `iss#002`, pending manual verification + PR + merge)**
+- **Per-session branches + autosave for multi-manager GitHub-mode use (issue #2).**
+  Each dashboard tab gets its own `dashboard/<id>` branch (created lazily off
+  `main` on first edit) instead of every session racing to commit straight to
+  `main`. A debounced (~10s) autosave checkpoints staged edits to that branch in
+  the background - recovers work if the tab crashes or closes, without touching
+  `main` or clearing the staging area. The explicit Commit button now pushes to
+  the session branch and opens (or updates) a pull request to `main`, surfaced as
+  a **PR #N** link next to Commit - "handle merge by master manager" becomes a
+  normal PR review, not a direct push. Local mode is untouched (single machine,
+  no multi-session risk there). Requires regenerating any saved PAT with **Pull
+  requests: Read and write** added.
 - **Markdown editor UX overhaul (issue #1).** The blog-post and research-interest
   split editor now labels each pane ("Markdown source" / "Live preview") at heading
   size, has a placeholder in the source textarea, and the preview pane mirrors the
@@ -54,10 +65,11 @@ High-level direction for the template. Notable changes live in
 - **Themed demo persona** - *Joomo Makguli* makgeolli-research demo content (EN/KO).
 
 ## Next up (next session)
-Issue #2 - handle failure modes in multi-session CMS/git use (branch-per-session +
-master-merge workflow for multiple managers editing the deployed dashboard
-concurrently, plus the in-memory staging area's content-loss risk on crash/reload).
-Branch convention: `iss#<NNN>` per issue, merged to `main` when done.
+Issue #2 is implemented on `iss#002` (see Recently shipped) but not yet verified
+live - it needs a real GitHub PAT against a deployed/real-OWNER-REPO dashboard,
+which can't be exercised from `cms-server.py`'s local mode. Once verified, open the
+PR (`Closes #2`) and merge. No other committed item yet for after that - see
+**Open threads** and **Ideas** below for candidates.
 
 ## Shelved
 - **Grammar-check button** - *Gave up.* No good keyless/free path: LanguageTool's

@@ -186,11 +186,20 @@ Two ways to edit content:
 
    When the dashboard is served from GitHub Pages instead, it falls back to committing
    through the GitHub API using a **fine-grained token** scoped to the repo
-   (Contents: read/write). Click **Authorize with GitHub** on the login screen to open
-   GitHub's token page pre-filled, then paste the token back. Owner/repo are detected
-   from the Pages URL (override `OWNER`/`REPO` in `static/admin/admin.js` for custom
-   domains). Use a short token expiration - the dashboard also self-expires the stored
-   token after 2 days. The dashboard's palette, light/dark mode, and UI language are
+   (Contents: read/write, **and Pull requests: read/write**). Click **Authorize with
+   GitHub** on the login screen to open GitHub's token page pre-filled, then paste the
+   token back. Owner/repo are detected from the Pages URL (override `OWNER`/`REPO` in
+   `static/admin/admin.js` for custom domains). Use a short token expiration - the
+   dashboard also self-expires the stored token after 2 days.
+
+   Each browser tab works on its own `dashboard/<id>` branch rather than committing
+   straight to `main` - this is what lets multiple people use the dashboard at once
+   without racing on the same branch. Edits autosave to that branch in the
+   background as you work; the **Commit** button pushes the latest edits there and
+   opens (or updates) a pull request to `main`, linked from a **PR #N** button next
+   to Commit - merging it is a normal GitHub PR review, not an automatic publish.
+
+   The dashboard's palette, light/dark mode, and UI language are
    adjustable from its header.
 
 ## Deployment
