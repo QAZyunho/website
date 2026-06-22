@@ -3,6 +3,29 @@
 All notable changes to this template are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com).
 
+## [Unreleased]
+
+### Added
+- **Dashboard: full-page preview overlay.** An **Open preview** button on the
+  blog-post and research-interest editors opens a full-page, non-interactive replica
+  of the deployed page (real nav, footer, post/interest layout and typography),
+  live-updating as you type and themed via the dashboard's own palette/dark-mode
+  state. Hand-ported from the site's partials/SCSS since the standalone admin page
+  doesn't run Hugo's build.
+- **Permanent placeholder image.** `static/images/placeholder.jpg`, a real photo
+  downloaded from Unsplash, for reuse anywhere a stable demo image is needed.
+
+### Changed
+- **Markdown split editor.** Each pane (source / preview) is now labeled at heading
+  size, the source textarea has a placeholder, and the preview pane's typography
+  mirrors the real published post (prose sizing, headings, blockquote, code, images,
+  and proper margin around in-content `---` dividers).
+- **Blog post Date field.** Now a native date picker instead of free text; legacy
+  full-timestamp frontmatter (e.g. `2025-01-01T09:00:00Z`) is truncated to
+  `YYYY-MM-DD` on load.
+- **`second-post*.md` demo content.** Replaced the "Hello world!" stub with 7
+  paragraphs of placeholder copy and the new example image, so it's showcase-ready.
+
 ## [1.0.0] - First public distribution, Ready for alpha test
 
 ### Added

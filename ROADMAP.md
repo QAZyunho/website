@@ -4,6 +4,24 @@ High-level direction for the template. Notable changes live in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Recently shipped
+**2026-06-22**
+- **Markdown editor UX overhaul (issue #1).** The blog-post and research-interest
+  split editor now labels each pane ("Markdown source" / "Live preview") at heading
+  size, has a placeholder in the source textarea, and the preview pane mirrors the
+  real post page's typography (prose sizing, headings, blockquote, code, images) -
+  including margin around in-content `---` dividers, which previously fell back to
+  the cramped browser default. The blog Date field is now a native date picker
+  (legacy full-timestamp frontmatter is truncated to `YYYY-MM-DD` on load).
+- **Full-page preview overlay.** Both editors gained an **Open preview** button that
+  opens a non-interactive, full-page replica of the deployed look - real nav, footer,
+  and post/interest layout, live-updating as you type, themed via the dashboard's
+  existing palette/dark-mode state. Hand-ported from the site's own partials/SCSS
+  since the standalone admin page can't run Hugo's template/build pipeline.
+- **`second-post*.md` filled in.** Resolved the open thread below: replaced the
+  "Hello world!" stub with 7 paragraphs of placeholder copy and a permanent example
+  image (`static/images/placeholder.jpg`, downloaded from a real Unsplash photo -
+  Lorem Picsum was down) so the post is no longer placeholder junk.
+
 **2026-06-12**
 - **Landing README + bilingual docs (v1.0.0, public).** Rewrote `README.md` as a
   landing page - hero, a "why this template" list, a feature table, a 5-minute
@@ -36,9 +54,10 @@ High-level direction for the template. Notable changes live in
 - **Themed demo persona** - *Joomo Makguli* makgeolli-research demo content (EN/KO).
 
 ## Next up (next session)
-The onboarding-polish goal is complete (landing README + QUICKSTART + bilingual docs
-+ screenshots, shipped 2026-06-12). No committed item for next session yet - see
-**Open threads** and **Ideas** below for candidates.
+Issue #2 - handle failure modes in multi-session CMS/git use (branch-per-session +
+master-merge workflow for multiple managers editing the deployed dashboard
+concurrently, plus the in-memory staging area's content-loss risk on crash/reload).
+Branch convention: `iss#<NNN>` per issue, merged to `main` when done.
 
 ## Shelved
 - **Grammar-check button** - *Gave up.* No good keyless/free path: LanguageTool's
@@ -51,9 +70,9 @@ The onboarding-polish goal is complete (landing README + QUICKSTART + bilingual 
   themed demo persona). When packaging the template for reuse, reset `baseURL`,
   `params.yaml` identity, and `data/`+`content/` back to neutral placeholders (or
   document that `init.py` + the dashboard are the intended reset path).
-- `content/blog/first-post*.md` were cleaned up this session (garbled MT prose
-  removed via the dashboard). Spot-check the remaining demo posts (e.g.
-  `second-post*.md`) for leftover junk before relying on them as a showcase.
+- `content/blog/first-post*.md` were cleaned up in an earlier session (garbled MT
+  prose removed via the dashboard); `second-post*.md` was filled in on 2026-06-22
+  (see Recently shipped). Both demo posts are showcase-ready now.
   (Lesson: translating single-word emphasis fragments like "italic" through
   MyMemory yields junk - a future refinement could skip too-short runs.)
 

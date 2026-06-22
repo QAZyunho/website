@@ -179,6 +179,11 @@ Two ways to edit content:
    *empty* fields so your hand-edits are never overwritten. Treat the output as a
    draft to review (conventional MT, not an LLM).
 
+   The blog-post and research-interest editors split into a live-rendered preview
+   next to the Markdown source (typography mirrors the real post page), plus an
+   **Open preview** button for a full-page, non-interactive replica of the deployed
+   look - real nav, footer, and layout - so you can check a draft before committing.
+
    When the dashboard is served from GitHub Pages instead, it falls back to committing
    through the GitHub API using a **fine-grained token** scoped to the repo
    (Contents: read/write). Click **Authorize with GitHub** on the login screen to open
