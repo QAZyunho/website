@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
 
 ## [Unreleased]
 
+## [1.1.0] - Multi-session GitHub-mode dashboard + reliability fixes
+
 ### Added
 - **Per-session branches + autosave (GitHub mode, issue #2).** Each open dashboard
   tab now works on its own `dashboard/<id>` branch instead of committing straight to
