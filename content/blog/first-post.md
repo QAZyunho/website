@@ -1,6 +1,6 @@
 ---
 title: Welcome to Brewhouse
-date: 2025-01-01T09:00:00Z
+date: 2025-01-01
 tags:
   - meta
 draft: false
@@ -21,3 +21,4 @@ def cheers(name: str) -> str:
 
 Delete this post when you're ready to publish it.
 
+Testing git diverging multi-session handling.
