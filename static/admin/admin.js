@@ -30,7 +30,17 @@ const LANGS = ['en', 'ko'];
 const DEFAULT_LANG = 'en';
 const PALETTES = ['forest', 'slate', 'crimson', 'plum'];
 const PARAMS_FILE = 'config/_default/params.yaml';
+const HUGO_FILE = 'config/_default/hugo.toml';
 const SECTION_KEYS = ['research', 'publications', 'blog', 'news', 'cv'];
+
+// Strings from i18n/en.toml / i18n/ko.toml, duplicated here since the full-page
+// preview overlay replicates the deployed page chrome and can't run Hugo's i18n.
+const LANG_LABELS = { en: 'English', ko: '한국어' };
+const SITE_I18N = {
+  en: { nav_home: 'Home', nav_research: 'Research', nav_publications: 'Publications', nav_blog: 'Blog', nav_news: 'News', nav_cv: 'CV', min_read: 'min read' },
+  ko: { nav_home: '홈', nav_research: '연구', nav_publications: '출판물', nav_blog: '블로그', nav_news: '소식', nav_cv: '이력서', min_read: '분 분량' },
+};
+function siteT(key) { return (SITE_I18N[state.lang] && SITE_I18N[state.lang][key]) || SITE_I18N.en[key] || key; }
 
 // ---- Dashboard UI language (separate from the content language) ------------
 // Translates the dashboard's own chrome. The schema-driven data-editor field
@@ -61,6 +71,9 @@ const I18N = {
     f_date: 'Date', f_tags: 'Tags (comma-separated)', f_draft: 'Draft', f_description: 'Description',
     f_body: 'Body (Markdown)', i_summary: 'Summary (shown on home)',
     i_details: 'Details (markdown, shown on the dedicated page)',
+    md_source_label: 'Markdown source', md_preview_label: 'Live preview',
+    md_body_ph: 'Write Markdown here…',
+    preview_open: 'Open preview', preview_close: 'Close preview',
     settings_note_a: 'Edits', settings_note_b: '. Your name (site title), baseURL, and the language list live in',
     settings_note_c: 'and are edited by hand. Saving rewrites the file and drops its comments.',
     s_sections_head: 'Sections (navigation & home)', color_palette: 'Color palette',
@@ -104,6 +117,9 @@ const I18N = {
     f_date: '날짜', f_tags: '태그 (쉼표로 구분)', f_draft: '초안', f_description: '설명',
     f_body: '본문 (마크다운)', i_summary: '요약 (홈에 표시)',
     i_details: '상세 (마크다운, 전용 페이지에 표시)',
+    md_source_label: '마크다운 원본', md_preview_label: '실시간 미리보기',
+    md_body_ph: '여기에 마크다운을 작성하세요…',
+    preview_open: '미리보기 열기', preview_close: '미리보기 닫기',
     settings_note_a: '편집 대상:', settings_note_b: '. 이름(사이트 제목), baseURL, 언어 목록은',
     settings_note_c: '에 있으며 직접 편집합니다. 저장 시 파일이 다시 쓰여 주석이 제거됩니다.',
     s_sections_head: '섹션 (내비게이션 및 홈)', color_palette: '색상 팔레트',
@@ -150,6 +166,8 @@ const state = {
   settings: null,  // parsed config/_default/params.yaml (settings editor)
   settingsSha: null,
   pending: new Map(), // staged edits: path -> {op:'put'|'delete', text, message}. Flushed as ONE commit.
+  siteTitle: null, // hugo.toml title, for the preview overlay's nav brand + footer (lazy-loaded)
+  previewKind: null, // 'blog' | 'interest' | null - which article the open preview overlay shows
 };
 
 // data/<lang>/<name> path for the active content language.
@@ -174,6 +192,9 @@ const el = {
   authorizeBtn: document.getElementById('authorize-btn'),
   themeToggle: document.getElementById('theme-toggle'),
   favicon: document.getElementById('favicon'),
+  previewOverlay: document.getElementById('preview-overlay'),
+  previewContent: document.getElementById('preview-overlay-content'),
+  previewClose: document.getElementById('preview-close'),
 };
 
 // ---- Utilities ------------------------------------------------------------
@@ -250,6 +271,11 @@ async function loadSiteChrome() {
     if (p.faviconEmoji) setFavicon(p.faviconEmoji);
     if (PALETTES.includes(p.palette)) document.documentElement.setAttribute('data-palette', p.palette);
   } catch (e) { /* non-fatal: keep the defaults already in the page */ }
+  try {
+    const { text } = await getFile(HUGO_FILE);
+    const m = text.match(/(?:^|\n)title\s*=\s*"(.*?)"/);
+    state.siteTitle = m ? m[1] : '';
+  } catch (e) { state.siteTitle = ''; } // non-fatal: nav brand / footer just render blank
 }
 
 // "Authorize with GitHub": deep-link to GitHub's fine-grained token page,
@@ -716,8 +742,14 @@ function blogFileName(slug) {
 // Reuses #f-body / #preview, so only one such editor is on screen at a time.
 function mdSplitHtml(value) {
   return `<div class="editor-grid with-preview md-split">
-    <div id="preview" class="preview"></div>
-    <textarea id="f-body" class="body-area">${esc(value || '')}</textarea>
+    <div class="md-split-pane">
+      <div class="md-split-label">${t('md_preview_label')}</div>
+      <div id="preview" class="preview"></div>
+    </div>
+    <div class="md-split-pane">
+      <div class="md-split-label">${t('md_source_label')}</div>
+      <textarea id="f-body" class="body-area" placeholder="${esc(t('md_body_ph'))}">${esc(value || '')}</textarea>
+    </div>
   </div>`;
 }
 function wireMdSplit() {
@@ -725,6 +757,7 @@ function wireMdSplit() {
   const preview = document.getElementById('preview');
   const render = () => { preview.innerHTML = marked.parse(bodyEl.value || ''); };
   bodyEl.addEventListener('input', render);
+  bodyEl.addEventListener('input', refreshPreviewIfOpen);
   bodyEl.addEventListener('paste', e => {
     const items = (e.clipboardData && e.clipboardData.items) || [];
     for (const it of items) {
@@ -735,6 +768,111 @@ function wireMdSplit() {
     }
   });
   render();
+}
+
+// ---- Full-page preview overlay --------------------------------------------
+// Renders the current draft inside a hand-ported replica of the deployed page
+// chrome (see the ".preview-overlay" rules in admin.css), so an editor can
+// check a real-page appearance before committing. The chrome is decorative
+// only - see ".preview-overlay .site-header, .footer { pointer-events: none }".
+
+// Matches the real page's `.Date.Format "January 2, 2006"` (always English,
+// regardless of content language - Go's layout-string formatting isn't
+// locale-aware here, and neither is the real template).
+function formatPostDate(iso) {
+  const d = new Date(`${iso || ''}T00:00:00`);
+  if (isNaN(d)) return iso || '';
+  return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+// Rough approximation of Hugo's .ReadingTime (word count / wpm, rounded up).
+// Exact parity isn't the point - this is a visual draft check, not a metric.
+function estimateReadingTime(text) {
+  const words = (text || '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+function previewNavHtml(activeSection) {
+  const items = [
+    ['', 'nav_home'], ['research-interests', 'nav_research'], ['publications', 'nav_publications'],
+    ['blog', 'nav_blog'], ['news', 'nav_news'], ['cv', 'nav_cv'],
+  ];
+  const links = items.map(([key, labelKey]) =>
+    `<a${key === activeSection ? ' class="active"' : ''}>${esc(siteT(labelKey))}</a>`).join('');
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return `
+    <header class="site-header">
+      <div class="container nav-container">
+        <span class="nav-brand">${esc(state.siteTitle || '')}</span>
+        <nav class="nav-links">
+          ${links}
+          <details class="lang-switch"><summary>${esc(LANG_LABELS[state.lang] || state.lang)}</summary></details>
+          <button class="theme-toggle" type="button"><span class="theme-toggle__icon">${dark ? '☀' : '☾'}</span></button>
+        </nav>
+      </div>
+    </header>`;
+}
+function previewFooterHtml() {
+  return `
+    <footer class="footer">
+      <div class="container footer-container">
+        <p>© ${new Date().getFullYear()} ${esc(state.siteTitle || '')}. Built with Hugo.</p>
+      </div>
+    </footer>`;
+}
+function blogPreviewArticleHtml() {
+  const title = document.getElementById('f-title').value.trim();
+  const dateStr = document.getElementById('f-date').value;
+  const tags = document.getElementById('f-tags').value.split(',').map(s => s.trim()).filter(Boolean);
+  const body = document.getElementById('f-body').value;
+  const tagsHtml = tags.length
+    ? `<div class="post-tags">${tags.map(tag => `<a class="tag-pill">${esc(tag)}</a>`).join('')}</div>` : '';
+  return `
+    <article class="blog-post">
+      <header class="post-header">
+        <h1 class="post-title">${esc(title)}</h1>
+        <div class="post-meta">
+          <time>${esc(formatPostDate(dateStr))}</time> · ${estimateReadingTime(body)} ${esc(siteT('min_read'))}
+        </div>
+        ${tagsHtml}
+      </header>
+      <div class="post-content">${marked.parse(body || '')}</div>
+    </article>`;
+}
+function interestPreviewArticleHtml() {
+  const title = document.getElementById('i-title').value.trim();
+  const summary = document.getElementById('i-summary').value.trim();
+  const body = document.getElementById('f-body').value;
+  return `
+    <article class="interest-single">
+      <header class="page-header"><h1>${esc(title)}</h1></header>
+      ${summary ? `<p class="interest-lead">${esc(summary)}</p>` : ''}
+      <div class="interest-body post-content">${marked.parse(body || '')}</div>
+    </article>`;
+}
+function renderPreviewOverlay() {
+  if (!state.previewKind) return;
+  const isBlog = state.previewKind === 'blog';
+  const article = isBlog ? blogPreviewArticleHtml() : interestPreviewArticleHtml();
+  el.previewContent.innerHTML = `
+    <div class="preview-page">
+      ${previewNavHtml(isBlog ? 'blog' : 'research-interests')}
+      <main class="container">${article}</main>
+      ${previewFooterHtml()}
+    </div>`;
+}
+async function openPreviewOverlay(kind) {
+  state.previewKind = kind;
+  if (state.siteTitle == null) await loadSiteChrome();
+  renderPreviewOverlay();
+  el.previewOverlay.classList.remove('hidden');
+}
+function closePreviewOverlay() {
+  state.previewKind = null;
+  el.previewOverlay.classList.add('hidden');
+  el.previewContent.innerHTML = '';
+}
+function refreshPreviewIfOpen() {
+  if (state.previewKind && !el.previewOverlay.classList.contains('hidden')) renderPreviewOverlay();
 }
 
 // ---- Pasted-image upload ---------------------------------------------------
@@ -865,6 +1003,8 @@ async function openBlogEditor(path) {
       const file = await getFile(path);
       const parsed = splitFrontmatter(file.text);
       fm = Object.assign(fm, parsed.fm);
+      // Date input only accepts YYYY-MM-DD - truncate legacy full-timestamp dates (e.g. "2025-01-01T09:00:00Z").
+      fm.date = String(fm.date || '').slice(0, 10);
       body = parsed.body;
       filename = path.split('/').pop().replace(/(\.[a-z]{2})?\.md$/, '');
     } catch (e) {
@@ -885,7 +1025,7 @@ async function openBlogEditor(path) {
       <div class="field-row">
         <div class="field"><label>${t('f_filename')}</label>
           <input id="f-name" type="text" value="${esc(filename)}" ${path ? 'readonly' : ''} placeholder="${t('f_filename_ph')}"></div>
-        <div class="field"><label>${t('f_date')}</label><input id="f-date" type="text" value="${esc(fm.date)}"></div>
+        <div class="field"><label>${t('f_date')}</label><input id="f-date" type="date" value="${esc(fm.date)}"></div>
       </div>
       <div class="field-row">
         <div class="field"><label>${t('f_tags')}</label><input id="f-tags" type="text" value="${esc(tags)}"></div>
@@ -899,12 +1039,16 @@ async function openBlogEditor(path) {
     <div class="sticky-actions">
       <button id="back-blog-2" class="btn btn--ghost">${t('cancel')}</button>
       ${LANGS.length > 1 ? `<button id="tr-post" class="btn btn--ghost">${trBtnLabel()}</button>` : ''}
+      <button id="open-preview" class="btn btn--soft">${t('preview_open')}</button>
       <button id="save-post" class="btn btn--primary">${path ? t('save_post') : t('create_post')}</button>
     </div>`;
 
   wireMdSplit();
   document.getElementById('back-blog').addEventListener('click', loadBlogList);
   document.getElementById('back-blog-2').addEventListener('click', loadBlogList);
+  document.getElementById('open-preview').addEventListener('click', () => openPreviewOverlay('blog'));
+  ['f-title', 'f-date', 'f-tags'].forEach(id =>
+    document.getElementById(id).addEventListener('input', refreshPreviewIfOpen));
   document.getElementById('save-post').addEventListener('click', () => savePost(path));
   const tp = document.getElementById('tr-post');
   if (tp) tp.addEventListener('click', () => {
@@ -1005,12 +1149,16 @@ function openInterestEditor(index) {
     <div class="sticky-actions">
       <button id="back-int-2" class="btn btn--ghost">${t('cancel')}</button>
       ${LANGS.length > 1 ? `<button id="tr-int" class="btn btn--ghost">${trBtnLabel()}</button>` : ''}
+      <button id="open-preview" class="btn btn--soft">${t('preview_open')}</button>
       <button id="save-int" class="btn btn--primary">${index == null ? t('create_interest') : t('save_interest')}</button>
     </div>`;
 
   wireMdSplit();
   document.getElementById('back-int').addEventListener('click', loadInterestsList);
   document.getElementById('back-int-2').addEventListener('click', loadInterestsList);
+  document.getElementById('open-preview').addEventListener('click', () => openPreviewOverlay('interest'));
+  ['i-title', 'i-summary'].forEach(id =>
+    document.getElementById(id).addEventListener('input', refreshPreviewIfOpen));
   document.getElementById('save-int').addEventListener('click', () => saveInterest(index));
   const ti = document.getElementById('tr-int');
   if (ti) ti.addEventListener('click', () => {
@@ -1326,7 +1474,7 @@ async function translatePost(baseName, overwrite, stats) {
     bodyEl.dispatchEvent(new Event('input')); // refresh the markdown preview
   }
   // Fixed fields stay identical across languages — copy them only if still empty.
-  if (!dateEl.value.trim() && s.fm.date) dateEl.value = s.fm.date;
+  if (!dateEl.value.trim() && s.fm.date) dateEl.value = String(s.fm.date).slice(0, 10);
   if (!tagsEl.value.trim() && Array.isArray(s.fm.tags)) tagsEl.value = s.fm.tags.join(', ');
 }
 
@@ -1353,6 +1501,7 @@ async function runTranslate(worker) {
 //  Routing / init
 // ===========================================================================
 function selectSection(section) {
+  closePreviewOverlay(); // don't leave a stale preview open across a section/list switch
   state.section = section;
   el.nav.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', tab.dataset.section === section));
   // The content-language selector applies to content editors, not the shared settings.
@@ -1391,6 +1540,10 @@ async function init() {
   // Warn before leaving with staged-but-uncommitted edits.
   window.addEventListener('beforeunload', e => {
     if (state.pending.size > 0) { e.preventDefault(); e.returnValue = ''; }
+  });
+  el.previewClose.addEventListener('click', closePreviewOverlay);
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && state.previewKind) closePreviewOverlay();
   });
   el.nav.querySelectorAll('.tab').forEach(tab =>
     tab.addEventListener('click', () => selectSection(tab.dataset.section)));
