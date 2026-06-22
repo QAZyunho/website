@@ -426,18 +426,36 @@ async function commitLocal(entries, message) {
 // hand with the Git Data API — new tree off the base, then move the branch ref.
 // Shared by autosave and the explicit Commit button; only the target branch and
 // whether state.pending gets cleared differ between the two.
+//
+// The GET-then-PATCH window here has no server-side locking - the ref can move
+// between reading its tip and moving it (e.g. an autosave landing moments before
+// the explicit Commit reads it), which the Git Data API surfaces as a 422 "not a
+// fast forward" on the final PATCH. That's an ordinary optimistic-concurrency
+// conflict, not data loss - retry by re-reading the now-current tip and rebuilding
+// on top of it, rather than surfacing a transient race as a hard failure.
+const PUSH_RETRY_ATTEMPTS = 3;
 async function pushToBranch(branch, entries, message) {
   const g = `/repos/${OWNER}/${REPO}/git`;
-  const ref = await gh('GET', `${g}/ref/heads/${branch}`);
-  const baseSha = ref.object.sha;
-  const baseCommit = await gh('GET', `${g}/commits/${baseSha}`);
-  const tree = entries.map(([path, p]) =>
-    p.op === 'delete'
-      ? { path, mode: '100644', type: 'blob', sha: null } // null sha removes the path
-      : { path, mode: '100644', type: 'blob', content: p.text });
-  const newTree = await gh('POST', `${g}/trees`, { base_tree: baseCommit.tree.sha, tree });
-  const commit = await gh('POST', `${g}/commits`, { message, tree: newTree.sha, parents: [baseSha] });
-  await gh('PATCH', `${g}/refs/heads/${branch}`, { sha: commit.sha });
+  for (let attempt = 1; ; attempt++) {
+    const ref = await gh('GET', `${g}/ref/heads/${branch}`);
+    const baseSha = ref.object.sha;
+    const baseCommit = await gh('GET', `${g}/commits/${baseSha}`);
+    const tree = entries.map(([path, p]) =>
+      p.op === 'delete'
+        ? { path, mode: '100644', type: 'blob', sha: null } // null sha removes the path
+        : { path, mode: '100644', type: 'blob', content: p.text });
+    const newTree = await gh('POST', `${g}/trees`, { base_tree: baseCommit.tree.sha, tree });
+    const commit = await gh('POST', `${g}/commits`, { message, tree: newTree.sha, parents: [baseSha] });
+    try {
+      await gh('PATCH', `${g}/refs/heads/${branch}`, { sha: commit.sha });
+      return;
+    } catch (e) {
+      if (!/not a fast forward/i.test(e.message) || attempt >= PUSH_RETRY_ATTEMPTS) throw e;
+      // The ref moved since our GET above - back off briefly, then loop around
+      // and rebuild on its new tip.
+      await new Promise(resolve => setTimeout(resolve, 400 * attempt));
+    }
+  }
 }
 
 // Restores this tab's session branch name from sessionStorage (no network) - call
