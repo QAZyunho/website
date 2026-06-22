@@ -43,6 +43,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com).
   write**, needed to open the PR your edits land in. Tokens saved before this
   change will need to be regenerated with that permission added.
 
+### Fixed
+- **Session branch lost its prefix on reload (GitHub mode).** Reopening or
+  reloading a dashboard tab after its session branch already existed pointed
+  reads at a ref named after the bare session id instead of `dashboard/<id>`,
+  failing with "no commit found for the ref \<id\>".
+- **Commit could fail with "not a fast forward" and open no PR.** Pushing to the
+  session branch read its current tip and moved it in two separate steps with no
+  retry; if the branch moved in between (e.g. an autosave landing moments
+  earlier), the push failed outright. Now retries up to 3 times against the
+  branch's latest tip before giving up.
+- **Dashboard could keep running stale JS after a deploy.** `admin.js`/`admin.css`
+  aren't part of Hugo's asset pipeline, so they weren't fingerprinted like
+  `main.js` - GitHub Pages' default ~10min cache on them could leave an open tab
+  on outdated code with no visible sign anything was wrong. The deploy workflow
+  now tags both with the commit SHA as a `?v=` query string.
+
 ## [1.0.0] - First public distribution, Ready for alpha test
 
 ### Added

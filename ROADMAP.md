@@ -4,7 +4,7 @@ High-level direction for the template. Notable changes live in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Recently shipped
-**2026-06-22 (on branch `iss#002`, pending manual verification + PR + merge)**
+**2026-06-22 (on branch `iss#002`, verified live, pending PR + merge)**
 - **Per-session branches + autosave for multi-manager GitHub-mode use (issue #2).**
   Each dashboard tab gets its own `dashboard/<id>` branch (created lazily off
   `main` on first edit) instead of every session racing to commit straight to
@@ -16,6 +16,20 @@ High-level direction for the template. Notable changes live in
   normal PR review, not a direct push. Local mode is untouched (single machine,
   no multi-session risk there). Requires regenerating any saved PAT with **Pull
   requests: Read and write** added.
+- **Three bugs found and fixed during live verification of issue #2:**
+  - `restoreSessionBranch()` assigned sessionStorage's bare hex id straight to
+    `state.sessionBranch`, skipping the `dashboard/` prefix - any reload after a
+    session branch already existed pointed reads at a nonexistent ref ("no commit
+    found for the ref \<id\>").
+  - `pushToBranch()`'s GET-then-PATCH had no retry, so an ordinary optimistic-
+    concurrency conflict (the ref moving between read and write - e.g. autosave
+    landing moments before an explicit Commit) surfaced as a hard "Commit failed"
+    422 with no PR ever opened. Now retries up to 3 times with backoff.
+  - `static/admin/` isn't part of Hugo's asset pipeline, so `admin.js`/`admin.css`
+    didn't get fingerprinted like `main.js` - GitHub Pages' default ~10min
+    Cache-Control could leave a dashboard tab running stale JS after a deploy,
+    silently. The deploy workflow now appends the commit SHA as a `?v=` query
+    string to both references.
 - **Markdown editor UX overhaul (issue #1).** The blog-post and research-interest
   split editor now labels each pane ("Markdown source" / "Live preview") at heading
   size, has a placeholder in the source textarea, and the preview pane mirrors the
@@ -65,11 +79,9 @@ High-level direction for the template. Notable changes live in
 - **Themed demo persona** - *Joomo Makguli* makgeolli-research demo content (EN/KO).
 
 ## Next up (next session)
-Issue #2 is implemented on `iss#002` (see Recently shipped) but not yet verified
-live - it needs a real GitHub PAT against a deployed/real-OWNER-REPO dashboard,
-which can't be exercised from `cms-server.py`'s local mode. Once verified, open the
-PR (`Closes #2`) and merge. No other committed item yet for after that - see
-**Open threads** and **Ideas** below for candidates.
+Issue #2 is verified live on `iss#002` (see Recently shipped) and merging to
+`main` now. No other committed item yet for after that - see **Open threads**
+and **Ideas** below for candidates.
 
 ## Shelved
 - **Grammar-check button** - *Gave up.* No good keyless/free path: LanguageTool's
