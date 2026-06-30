@@ -6,3 +6,13 @@
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# LaTeX build artifacts (static/cv.pdf is the published copy)
+cv/*.aux
+cv/*.log
+cv/*.out
+cv/*.pdf
+
+# Local dev server logs
+hugo-server.log
+hugo-server-err.log

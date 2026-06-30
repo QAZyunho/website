@@ -1,0 +1,86 @@
+\documentclass[10.5pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+\newfontfamily\cjkfont{Malgun Gothic}
+
+\definecolor{accent}{HTML}{2C5F8A}
+\definecolor{textgray}{HTML}{444444}
+
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}
+  {\large\bfseries\color{accent}}
+  {}{0em}{}
+  [\vspace{-0.6em}{\color{accent!40}\hrule height 0.8pt}\vspace{0.4em}]
+\titlespacing*{\section}{0pt}{1.1em}{0.6em}
+
+\newcommand{\entry}[3]{%
+  \textbf{#1} \hfill \textcolor{textgray}{#2}\\
+  \textit{\textcolor{textgray}{#3}}\par\vspace{0.5em}
+}
+
+\newcommand{\pub}[4]{%
+  \textbf{#1}\\
+  #2\\
+  \textit{\textcolor{textgray}{#3}}#4\par\vspace{0.6em}
+}
+
+\begin{document}
+
+{\centering
+  {\Huge\bfseries Yunho Kim}\par
+  \vspace{0.4em}
+  \color{textgray}
+  rladbsgh797210@gmail.com
+  \;\textbar\;
+  010-2377-3059
+  \;\textbar\;
+  \href{https://github.com/QAZyunho}{github.com/QAZyunho}
+  \;\textbar\;
+  \href{https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en}{Google Scholar}
+  \par
+}
+
+\vspace{0.8em}
+
+\section{Education}
+
+\entry{Gwangju Institute of Science and Technology (GIST)}{Mar. 2025 -- Present}
+{M.S. in AI Convergence \,\textbar\; Data Science Lab, advised by Prof. Sundong Kim}
+
+\entry{Gwangju Institute of Science and Technology (GIST)}{Mar. 2019 -- Feb. 2025}
+{B.S. in Electrical Engineering and Computer Science \,\textbar\; GPA: 3.99/4.5}
+
+\entry{University of California, Berkeley}{Jun. 2023 -- Aug. 2023}
+{Exchange Student, Summer Session \,\textbar\; GPA: 3.5/4.3}
+
+\section{Publications}
+
+\pub{On the Role of Proposal Support in Diffusion-Based Offline RL for Sequential Decision-Making}
+{Yunho Kim, Jaehyun Park, Heejun Kim, Sejin Kim, Byung-Jun Lee, Sundong Kim}
+{ICML 2026 Workshop DEMO}{}
+
+\pub{Diffusion-Guided Q-Learning for Offline RL: Adaptive Revaluation for Long-Horizon Decision Making}
+{Jaehyun Park, Yunho Kim, Sejin Kim, Byung-Jun Lee, Sundong Kim}
+{CoRL 2025 Workshop LEAP}{}
+
+\pub{\cjkfont 거대언어모델의 추론능력 평가를 위한 MC-LARC 데이터셋}
+{\cjkfont 신동현, 황산하, 이석기, 김윤호, 이승필, 김선동}
+{한국소프트웨어종합학술대회 (KSC 2023)}{ \cjkfont \,\textbar\; 2023}
+
+\section{Skills}
+
+\textbf{Languages:} Korean (Native), English (TOEIC 870/990)\par\vspace{0.4em}
+\textbf{Programming:} Python, C/C++, R, Java
+
+\end{document}
