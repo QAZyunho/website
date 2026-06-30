@@ -1,16 +1,16 @@
-description: Ph.D. in Korean Rice wine brewery
-tagline: Double distillation rice wine whiskey
-faviconEmoji: 🍶
-profileImage: images/profile.svg
-email: iamdrunk@pub.street
-googleScholar: https://scholar.google.com/
-github: https://github.com/makguli
-linkedin: https://linkedin.com/in/makguli
+description: "AI Convergence · M.S. Student"
+tagline: ""
+faviconEmoji: 🤖
+profileImage: images/picture.jpg
+email: rladbsgh797210@gmail.com
+googleScholar: https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en
+github: https://github.com/QAZyunho
+linkedin: ""
 cvPdf: cv.pdf
-palette: plum
+palette: slate
 sections:
-  research: true
+  research: false
   publications: true
-  blog: true
-  news: true
+  blog: false
+  news: false
   cv: true

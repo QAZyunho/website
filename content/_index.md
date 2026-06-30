@@ -1,12 +1,6 @@
 ---
 title: "Home"
 ---
-I am a Ph.D. candidate at [Jumak National University](https://example.com), brewing in the
-Fermentation & Distillation Lab under Prof. Nuruk. My research centers on makgeolli
-fermentation dynamics and out-of-tavern generalization - crafting brews that stay
-reliable when the drinking conditions drift away from the lab bench.
+I am an M.S. student in the Department of AI Convergence at Gwangju Institute of Science and Technology (GIST), affiliated with the Data Science Lab under Prof. Sundong Kim.
 
-I am broadly interested in the foundations of fermentation and in applying double
-distillation to the great unsolved questions of conviviality. When a batch turns out
-well, the lab tradition is to shout **주모!** and pour another round. This is placeholder
-text - replace it with your own short bio.
+My research interests lie in reinforcement learning and sequential decision-making, with a broader curiosity about how AI systems can be designed to reason in ways that reflect human cognition. I am particularly interested in offline RL settings and in understanding what shapes the quality of learned policies.

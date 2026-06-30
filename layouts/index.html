@@ -17,14 +17,15 @@
   <div class="profile-bio">
     <h1>{{ site.Title }}</h1>
     <p class="affiliation">{{ site.Params.description }}</p>
+    {{ with site.Params.email }}<p class="profile-email">{{ . }}</p>{{ end }}
     {{ with site.Params.tagline }}<p class="one-liner">{{ . }}</p>{{ end }}
-    {{ with .Content }}<div class="bio">{{ . }}</div>{{ end }}
+    {{ with .Content }}<hr class="profile-divider"><div class="bio">{{ . }}</div>{{ end }}
     <div class="social-links">
-      <a href="mailto:{{ site.Params.email }}">{{ i18n "social_email" }}</a>
-      <a href="{{ site.Params.googleScholar }}">{{ i18n "social_scholar" }}</a>
-      <a href="{{ site.Params.github }}">{{ i18n "social_github" }}</a>
-      <a href="{{ site.Params.linkedin }}">{{ i18n "social_linkedin" }}</a>
-      <a href="{{ site.Params.cvPdf | relURL }}">{{ i18n "social_cv" }}</a>
+      {{ with site.Params.email }}<a href="https://mail.google.com/mail/?view=cm&to={{ . }}">{{ i18n "social_email" }}</a>{{ end }}
+      {{ with site.Params.googleScholar }}<a href="{{ . }}">{{ i18n "social_scholar" }}</a>{{ end }}
+      {{ with site.Params.github }}<a href="{{ . }}">{{ i18n "social_github" }}</a>{{ end }}
+      {{ with site.Params.linkedin }}<a href="{{ . }}">{{ i18n "social_linkedin" }}</a>{{ end }}
+      {{ with site.Params.cvPdf }}<a href="{{ . | relURL }}">{{ i18n "social_cv" }}</a>{{ end }}
     </div>
   </div>
 </section>
@@ -34,14 +35,13 @@
 <section class="home-section">
   <h2>{{ i18n "research_interests" }}</h2>
   <div class="interests-list">
-    {{ range first 3 $data.research_interests }}
+    {{ range $data.research_interests }}
     <div class="interest-item">
-      <h3 class="interest-title"><a href="{{ (printf "research-interests/%s/" (.title | urlize)) | relLangURL }}">{{ .title }}</a></h3>
+      <h3 class="interest-title">{{ .title }}</h3>
       <p class="interest-summary">{{ .summary }}</p>
     </div>
     {{ end }}
   </div>
-  <a href="{{ "research-interests/" | relLangURL }}" class="see-all-link">{{ i18n "all_research_interests" }}</a>
 </section>
 {{ end }}
 
@@ -52,7 +52,12 @@
   <ul class="selected-pubs">
     {{ range where $data.publications "selected" true }}
     <li>
-      <a class="paper-title" href="{{ (printf "publications/%s/" (.title | urlize)) | relLangURL }}">{{ .title }}</a>
+      {{ if .paperUrl }}
+      <a class="paper-title" href="{{ .paperUrl }}">{{ .title }}</a>
+      {{ else }}
+      <span class="paper-title">{{ .title }}</span>
+      {{ end }}
+      <span class="paper-authors">{{ .authors | markdownify }}</span>
       <span class="paper-venue">{{ .venue }} · {{ .year }}</span>
       {{ with .award }}<span class="paper-award">🏆 {{ . }}</span>{{ end }}
     </li>
@@ -88,14 +93,16 @@
     </div>
     {{ end }}
   </div>
+  {{ with $data.cv.awards }}
   <div class="cv-subsection">
     <h3>{{ i18n "awards" }}</h3>
     <ul class="awards-list">
-      {{ range $data.cv.awards }}
+      {{ range . }}
       <li>{{ .title }}{{ with .year }} ({{ . }}){{ end }}</li>
       {{ end }}
     </ul>
   </div>
+  {{ end }}
   <a href="{{ "cv/" | relLangURL }}" class="see-all-link">{{ i18n "full_cv" }}</a>
 </section>
 {{ end }}

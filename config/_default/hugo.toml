@@ -1,9 +1,9 @@
 # Structural site configuration. Owner-editable settings (identity, social links,
 # palette, enabled sections) live in params.yaml so the /admin dashboard can edit
 # them as YAML. Per-language param overrides stay here under [languages.<lang>.params].
-baseURL = "https://2ood.github.io/hugo-academic-portfolio/"
+baseURL = "https://QAZyunho.github.io/website/"
 locale = "en"
-title = "Joomo Makguli"
+title = "Yunho Kim"
 defaultContentLanguage = "en"
 
 [taxonomies]
@@ -24,10 +24,3 @@ defaultContentLanguage = "en"
     label = "English"
     locale = "en"
     weight = 1
-  [languages.ko]
-    label = "한국어"
-    locale = "ko"
-    weight = 2
-    [languages.ko.params]
-      description = "박사과정 · 주막대학교 발효·증류 연구실"
-      tagline = "막걸리 이중 증류와 술청 밖 일반화를 연구합니다."
