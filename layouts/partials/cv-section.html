@@ -25,7 +25,7 @@
         </div>
       {{ else if .role }}
         {{/* Service */}}
-        <div class="cv-entry-date"></div>
+        <div class="cv-entry-date">{{ .period }}</div>
         <div class="cv-entry-content">
           <h3 class="cv-entry-title">{{ .role }}</h3>
           {{ with .detail }}<div class="cv-entry-subtitle">{{ . }}</div>{{ end }}
