@@ -14,6 +14,7 @@
   </div>
   <div class="pub-links">
     {{ with $p.Params.paperUrl }}<a class="link-pill" href="{{ . }}">{{ i18n "link_paper" }}</a>{{ end }}
+    {{ with $p.Params.paperPdf }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_pdf" }}</a>{{ end }}
     {{ with $p.Params.posterUrl }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_poster" }}</a>{{ end }}
     {{ with $p.Params.codeUrl }}<a class="link-pill" href="{{ . }}">{{ i18n "link_code" }}</a>{{ end }}
     {{ with $p.Params.dataUrl }}<a class="link-pill" href="{{ . }}">{{ i18n "link_data" }}</a>{{ end }}

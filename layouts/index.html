@@ -60,6 +60,7 @@
       <span class="paper-authors">{{ .authors | markdownify }}</span>
       <span class="paper-venue">{{ .venue }} · {{ .year }}</span>
       {{ with .award }}<span class="paper-award">🏆 {{ . }}</span>{{ end }}
+      {{ with .paperPdf }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_pdf" }}</a>{{ end }}
       {{ with .posterUrl }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_poster" }}</a>{{ end }}
     </li>
     {{ end }}

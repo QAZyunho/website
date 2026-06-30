@@ -46,6 +46,7 @@ type_preprint = "Preprint"
 
 # Publication / research detail
 link_paper = "Paper"
+link_pdf = "PDF"
 link_code = "Code"
 link_data = "Data"
 link_project = "Project Website"
