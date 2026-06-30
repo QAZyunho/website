@@ -10,7 +10,7 @@
 {{ $pubs := "publications/" | relLangURL }}
 {{ $blog := "blog/" | relLangURL }}
 {{ $news := "news/" | relLangURL }}
-{{ $cv := "cv/" | relLangURL }}
+{{ $cv := site.Params.cvPdf | relURL }}
 {{ $s := site.Params.sections | default dict }}
 
 <header class="site-header">
