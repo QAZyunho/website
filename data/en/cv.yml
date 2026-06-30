@@ -8,6 +8,19 @@ education:
   - institution: Gwangju Institute of Science and Technology (GIST)
     degree: B.S. in Electrical Engineering and Computer Science
     period: Mar. 2019 - Feb. 2025
+funding:
+  - title: National Research Foundation of Korea Funding, NRF
+    period: Sep. 2025 - Aug. 2026
+    detail: "Awarded research funding of ₩12,000,000 as a master's student through the National Research Foundation of Korea (NRF)"
+  - title: Korean Government Scholarships, GIST College
+    period: Mar. 2025 - Present
+    detail: Scholarship awarded to graduate students studying at GIST
+  - title: Korean Government Scholarships, GIST College
+    period: Mar. 2019 - Feb. 2025
+    detail: Scholarship awarded to undergraduate students studying at GIST
+  - title: Scholarship for Summer Session Abroad (UC Berkeley)
+    period: Jun. 2023 - Aug. 2023
+    detail: Scholarship awarded to students studying abroad during a summer session
 service:
   - role: GIST Global Internship Program (GIP) - Mentor
     detail: Mentored a summer intern for 2 months

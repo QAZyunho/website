@@ -30,6 +30,13 @@
           <h3 class="cv-entry-title">{{ .role }}</h3>
           {{ with .detail }}<div class="cv-entry-subtitle">{{ . }}</div>{{ end }}
         </div>
+      {{ else if .detail }}
+        {{/* Funding & Scholarship */}}
+        <div class="cv-entry-date">{{ .period }}</div>
+        <div class="cv-entry-content">
+          <h3 class="cv-entry-title">{{ .title }}</h3>
+          <div class="cv-entry-subtitle">{{ .detail }}</div>
+        </div>
       {{ else }}
         {{/* Awards */}}
         <div class="cv-entry-date">{{ .year }}</div>

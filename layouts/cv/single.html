@@ -14,6 +14,9 @@
   {{ with $cv.education }}
     {{ partial "cv-section.html" (dict "title" (i18n "education") "items" .) }}
   {{ end }}
+  {{ with $cv.funding }}
+    {{ partial "cv-section.html" (dict "title" (i18n "funding") "items" .) }}
+  {{ end }}
   {{ with $cv.awards }}
     {{ partial "cv-section.html" (dict "title" (i18n "awards") "items" .) }}
   {{ end }}
