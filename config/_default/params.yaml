@@ -5,11 +5,11 @@ profileImage: images/picture.jpg
 email: rladbsgh797210@gmail.com
 googleScholar: https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en
 github: https://github.com/QAZyunho
-linkedin: ""
+linkedin: "https://www.linkedin.com/in/yunho-kim-921710341/"
 cvPdf: cv.pdf
 palette: slate
 sections:
-  research: false
+  research: true
   publications: true
   blog: false
   news: false

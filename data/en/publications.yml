@@ -5,6 +5,7 @@
   type: Workshop
   selected: true
   paperUrl: https://openreview.net/forum?id=roLdW7qeCO
+  posterUrl: posters/SOLAR_ICML_Workshop_2026_Poster.pdf
 - title: "Diffusion-Guided Q-Learning for Offline RL: Adaptive Revaluation for Long-Horizon Decision Making"
   authors: "Jaehyun Park, **Yunho Kim**, Sejin Kim, Byung-Jun Lee, Sundong Kim"
   venue: "CoRL 2025 Workshop LEAP"
@@ -12,6 +13,7 @@
   type: Workshop
   selected: true
   paperUrl: https://openreview.net/forum?id=UB1fGodhE1
+  posterUrl: posters/DIAR_CoRL_Workshop_2025_Poster.pdf
 - title: "거대언어모델의 추론능력 평가를 위한 MC-LARC 데이터셋"
   authors: "신동현, 황산하, 이석기, **김윤호**, 이승필, 김선동"
   venue: "한국소프트웨어종합학술대회 (KSC 2023)"

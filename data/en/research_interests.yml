@@ -1,18 +1,11 @@
-- title: Human-imitating AI
+- title: Offline Reinforcement Learning
   summary: |
-    I am interested in AI systems that reason in a staged, interpretable way that
-    mirrors human cognition. This includes abstract reasoning tasks that require
-    genuine rule inference from minimal examples, a hallmark of human fluid intelligence.
+    I study how agents learn good sequential decision-making policies from fixed,
+    previously collected data, without further interaction with the environment.
+    I'm particularly interested in what shapes the quality of the policies learned
+    this way.
 
-- title: Reinforcement Learning
+- title: Human-like Reasoning in AI
   summary: |
-    I am interested in how agents learn to make better sequential decisions through
-    experience. I am particularly drawn to offline settings, where policies must be
-    learned from fixed datasets, and to structured environments where each step of
-    a decision process can be examined and evaluated.
-
-- title: Machine Learning
-  summary: |
-    I am broadly interested in generalization: when and why learned models transfer
-    beyond their training conditions. This includes robustness under distribution shift
-    and compositional generalization, the ability to combine learned knowledge in novel ways.
+    I'm broadly curious about how AI systems can be designed to reason in ways
+    that reflect human cognition, beyond optimizing a single objective.
