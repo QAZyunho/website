@@ -35,6 +35,15 @@
   \textit{\textcolor{textgray}{#3}}#4\par\vspace{0.6em}
 }
 
+% Korean-language entry: Malgun Gothic has no italic shape, so the venue
+% line is set upright instead of silently falling back to regular weight
+% mid-italic, which looked inconsistent next to the Latin entries above.
+\newcommand{\pubkr}[4]{%
+  {\cjkfont\bfseries #1}\\
+  {\cjkfont #2}\\
+  {\cjkfont\textcolor{textgray}{#3}}#4\par\vspace{0.6em}
+}
+
 \begin{document}
 
 {\centering
@@ -74,9 +83,9 @@
 {Jaehyun Park, Yunho Kim, Sejin Kim, Byung-Jun Lee, Sundong Kim}
 {CoRL 2025 Workshop LEAP}{}
 
-\pub{\cjkfont 거대언어모델의 추론능력 평가를 위한 MC-LARC 데이터셋}
-{\cjkfont 신동현, 황산하, 이석기, 김윤호, 이승필, 김선동}
-{한국소프트웨어종합학술대회 (KSC 2023)}{ \cjkfont \,\textbar\; 2023}
+\pubkr{거대언어모델의 추론능력 평가를 위한 MC-LARC 데이터셋}
+{신동현, 황산하, 이석기, 김윤호, 이승필, 김선동}
+{한국소프트웨어종합학술대회 (KSC 2023)}{\,\textbar\; 2023}
 
 \section{Skills}
 
