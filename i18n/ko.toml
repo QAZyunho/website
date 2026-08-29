@@ -45,6 +45,7 @@ type_preprint = "프리프린트"
 
 # 출판물 / 연구 상세
 link_paper = "논문"
+link_poster = "포스터"
 link_code = "코드"
 link_data = "데이터"
 link_project = "프로젝트 웹사이트"

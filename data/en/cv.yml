@@ -25,3 +25,7 @@ service:
   - role: GIST Global Internship Program (GIP) - Mentor
     detail: Mentored a summer intern for 2 months
     period: Jun. 2025 - Aug. 2025
+  - role: GIST Summer Undergraduate Research Fellowship (G-SURF) - Researcher
+    detail: "Researched latent space representations in offline RL (VAE/LDCQ) under Prof. Sundong Kim and Jaehyun Park, GIST Data Science Lab"
+    period: Jun. 2024 - Aug. 2024
+    posterUrl: posters/GSURF_2024_Poster.pdf

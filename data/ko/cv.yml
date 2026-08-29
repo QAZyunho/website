@@ -3,3 +3,11 @@ education:
   - institution: 광주과학기술원 (GIST)
     degree: 전기전자컴퓨터공학부 학사 과정
     period: 2022 - 현재
+service:
+  - role: GIST Global Internship Program (GIP) - 멘토
+    detail: 여름 인턴 1명을 2개월간 멘토링
+    period: 2025.06 - 2025.08
+  - role: GIST Summer Undergraduate Research Fellowship (G-SURF) - 학부연구생
+    detail: "GIST Data Science Lab에서 Sundong Kim 교수님과 Jaehyun Park의 지도 하에 오프라인 강화학습(VAE/LDCQ)의 잠재 공간 표현 연구 수행"
+    period: 2024.06 - 2024.08
+    posterUrl: posters/GSURF_2024_Poster.pdf

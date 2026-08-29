@@ -29,6 +29,11 @@
         <div class="cv-entry-content">
           <h3 class="cv-entry-title">{{ .role }}</h3>
           {{ with .detail }}<div class="cv-entry-subtitle">{{ . }}</div>{{ end }}
+          {{ with .posterUrl }}
+          <div class="pub-links">
+            <a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_poster" }}</a>
+          </div>
+          {{ end }}
         </div>
       {{ else if .detail }}
         {{/* Funding & Scholarship */}}
