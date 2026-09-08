@@ -4,17 +4,26 @@ education:
     degree: 전기전자컴퓨터공학부 학사 과정
     period: 2022 - 현재
 service:
+  - role: "TAIC'26: Thinking about AI's Capability - 운영 스태프"
+    detail: "ICML 2026 직전 우리 연구실(GIST Data Science Lab)이 주최한 워크숍 TAIC'26의 현장 운영 지원"
+    period: 2026.07
+  - role: GIST AI대학원 오픈랩 - 연구실 소개
+    detail: "GIST AI대학원 오픈랩 행사에서 총 4개 학기(2024 가을, 2025 봄, 2025 가을, 2026 봄)에 걸쳐 방문 학생들에게 연구실 소개"
+    period: 2024 가을학기 - 2026 봄학기
   - role: GIST Global Internship Program (GIP) - 멘토
     detail: 여름 인턴 1명을 2개월간 멘토링
     period: 2025.06 - 2025.08
+  - role: 2025 대한민국과학기술대전 - 부스 운영
+    detail: "연구실 전시 부스를 운영하며 방문객들에게 연구실 연구 분야를 소개"
+    period: 2025.04
   - role: GIST Summer Undergraduate Research Fellowship (G-SURF) - 학부연구생
     detail: "GIST Data Science Lab에서 Sundong Kim 교수님과 Jaehyun Park의 지도 하에 오프라인 강화학습(VAE/LDCQ)의 잠재 공간 표현 연구 수행. 2024년 11월 고려대·KAIST·GIST 공동 연구 교류 행사에서 발표했으며, 현재 석사 과정 연구 주제로 이어짐"
     period: 2024.06 - 2024.08
     posterUrl: posters/GSURF_2024_Poster.pdf
 patents:
-  - title: "오프라인 강화학습을 위한 규칙 기반 합성 데이터 생성 방법 및 시스템"
+  - title: "[특허출원] 오프라인 강화학습을 위한 규칙 기반 합성 데이터 생성 방법 및 시스템"
     period: 2025.10
     detail: "GIST 산학협력단 · 공동발명자 (지분 20%) · 국내 특허 출원 (출원번호 10-2025-0148978). 오프라인 강화학습 학습 데이터를 규칙 기반으로 합성 생성하는 방법과 시스템에 관한 발명으로, ARC 과제의 궤적 데이터셋 구축 연구에 적용했습니다"
-  - title: "적응적 재평가 기반 실행 시스템 및 이의 제어 방법, 그리고 적응적 재평가 기반 실행 시스템의 학습 방법"
+  - title: "[특허출원] 적응적 재평가 기반 실행 시스템 및 이의 제어 방법, 그리고 적응적 재평가 기반 실행 시스템의 학습 방법"
     period: 2025.10
     detail: "GIST 산학협력단 · 공동발명자 (지분 25%) · 국내 특허 출원 (출원번호 10-2025-0148979). 장기 지평 의사결정에서 실행 계획의 재평가 시점을 적응적으로 결정하는 시스템과 그 학습 방법에 관한 발명입니다"
