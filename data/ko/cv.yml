@@ -3,6 +3,9 @@ education:
   - institution: 광주과학기술원 (GIST)
     degree: 전기전자컴퓨터공학부 학사 과정
     period: 2022 - 현재
+  - institution: 인천과학고등학교
+    degree: 과학고 조기졸업 (2년)
+    period: 2017.03 - 2019.02
 service:
   - role: "TAIC'26: Thinking about AI's Capability - 운영 스태프"
     detail: "ICML 2026 직전 우리 연구실(GIST Data Science Lab)이 주최한 워크숍 TAIC'26의 현장 운영 지원"
