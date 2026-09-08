@@ -28,6 +28,7 @@ see_all_publications = "모든 출판물 보기 →"
 see_all_news = "모든 소식 보기 →"
 full_cv = "전체 이력서 →"
 open_pdf = "PDF 열기 ↓"
+open_pdf_ko = "한국어 이력서 (PDF) ↓"
 
 # 프로필 소셜 링크
 social_email = "이메일"

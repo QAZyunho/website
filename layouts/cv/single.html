@@ -5,9 +5,14 @@
 <section class="cv-page">
   <header class="cv-header">
     <h1>{{ i18n "curriculum_vitae" }}</h1>
-    {{ with site.Params.cvPdf }}
-      <a href="{{ . | relURL }}" class="download-btn">{{ i18n "open_pdf" }}</a>
-    {{ end }}
+    <div class="cv-header-actions">
+      {{ with site.Params.cvPdf }}
+        <a href="{{ . | relURL }}" class="download-btn">{{ i18n "open_pdf" }}</a>
+      {{ end }}
+      {{ with site.Params.cvPdfKo }}
+        <a href="{{ . | relURL }}" class="download-btn">{{ i18n "open_pdf_ko" }}</a>
+      {{ end }}
+    </div>
   </header>
 
   {{ $cv := (index hugo.Data site.Language.Lang).cv }}
