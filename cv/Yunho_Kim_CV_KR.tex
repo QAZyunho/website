@@ -1,6 +1,6 @@
 \documentclass[10.5pt,a4paper]{article}
 
-\usepackage[margin=1.9cm]{geometry}
+\usepackage[margin=2.2cm]{geometry}
 \usepackage{fontspec}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -19,21 +19,29 @@
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 
 \titleformat{\section}
   {\large\bfseries\color{accent}}
   {}{0em}{}
   [{\color{accent!40}\titlerule[0.8pt]}]
-\titlespacing*{\section}{0pt}{0.85em}{0.5em}
+\titlespacing*{\section}{0pt}{1.3em}{0.8em}
 
+% Title+date row as a two-column table (not \hfill) so a long title can
+% wrap onto a second line without stranding the date off on its own.
 \newcommand{\entry}[3]{%
-  \textbf{#1} \hfill \textcolor{textgray}{#2}\\
-  \textcolor{textgray}{#3}\par\vspace{0.28em}
+  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & \textcolor{textgray}{#2}
+  \end{tabularx}\\
+  \textcolor{textgray}{#3}\par\vspace{0.5em}
 }
 
 \newcommand{\fund}[3]{%
-  \textbf{#1} \hfill \textcolor{textgray}{#2}\\
-  \textcolor{textgray}{$\cdot$\ #3}\par\vspace{0.28em}
+  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & \textcolor{textgray}{#2}
+  \end{tabularx}\\
+  \textcolor{textgray}{$\cdot$\ #3}\par\vspace{0.5em}
 }
 
 % Malgun Gothic has no italic shape, so publication venue lines are set
@@ -41,7 +49,7 @@
 \newcommand{\pub}[4]{%
   \textbf{#1}\\
   #2\\
-  \textcolor{textgray}{#3}#4\par\vspace{0.45em}
+  \textcolor{textgray}{#3}#4\par\vspace{0.6em}
 }
 
 \begin{document}
