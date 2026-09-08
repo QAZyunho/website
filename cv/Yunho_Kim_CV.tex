@@ -18,8 +18,6 @@
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
 
 \titleformat{\section}
   {\large\bfseries\color{accent}}
@@ -29,24 +27,29 @@
 
 % Title+date row as a two-column table (not \hfill) so a long title can
 % wrap onto a second line without stranding the date off on its own.
+% Body text is ragged-right throughout: fully-justified CJK/Latin mixed
+% text can hit bad breakpoints (no valid stretch) and overflow the
+% margin, so we trade a even right edge for text that never overflows.
+% Titles additionally get hyphenpenalty=10000 locally (not document-wide)
+% so a long title wraps at word boundaries instead of mid-word.
 \newcommand{\entry}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \textcolor{textgray}{#2}
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\hyphenpenalty=10000\exhyphenpenalty=10000\textbf{#1}} & \textcolor{textgray}{#2}
   \end{tabularx}\\
-  \textit{\textcolor{textgray}{#3}}\par\vspace{0.5em}
+  {\raggedright\textit{\textcolor{textgray}{#3}}\par}\vspace{0.5em}
 }
 
 \newcommand{\fund}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \textcolor{textgray}{#2}
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\hyphenpenalty=10000\exhyphenpenalty=10000\textbf{#1}} & \textcolor{textgray}{#2}
   \end{tabularx}\\
-  \textcolor{textgray}{$\cdot$\ #3}\par\vspace{0.5em}
+  {\raggedright\textcolor{textgray}{$\cdot$\ #3}\par}\vspace{0.5em}
 }
 
 \newcommand{\pub}[4]{%
   \textbf{#1}\\
   #2\\
-  \textit{\textcolor{textgray}{#3}}#4\par\vspace{0.6em}
+  {\raggedright\textit{\textcolor{textgray}{#3}}#4\par}\vspace{0.6em}
 }
 
 % Korean-language entry: Malgun Gothic has no italic shape, so the venue
@@ -55,7 +58,7 @@
 \newcommand{\pubkr}[4]{%
   {\cjkfont\bfseries #1}\\
   {\cjkfont #2}\\
-  {\cjkfont\textcolor{textgray}{#3}}#4\par\vspace{0.6em}
+  {\raggedright{\cjkfont\textcolor{textgray}{#3}}#4\par}\vspace{0.6em}
 }
 
 \begin{document}
@@ -73,11 +76,8 @@
   \href{https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en}{Google Scholar}
   \par
   \vspace{0.5em}
-  \begin{tabular}{c@{\hspace{1.4cm}}c}
-    \qrcode[height=1.3cm]{https://qazyunho.github.io/website/} &
-    \qrcode[height=1.3cm]{https://gist-dslab.github.io/SOLAR-V2/} \\[0.15em]
-    {\footnotesize Personal Website} & {\footnotesize SOLAR-V2 Demo}
-  \end{tabular}
+  \qrcode[height=1.3cm]{https://qazyunho.github.io/website/}\par
+  {\footnotesize Personal Website}
   \par
 }
 

@@ -19,8 +19,6 @@
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
 
 \titleformat{\section}
   {\large\bfseries\color{accent}}
@@ -30,18 +28,23 @@
 
 % Title+date row as a two-column table (not \hfill) so a long title can
 % wrap onto a second line without stranding the date off on its own.
+% Body text is ragged-right throughout: fully-justified CJK/Latin mixed
+% text can hit bad breakpoints (no valid stretch) and overflow the
+% margin, so we trade an even right edge for text that never overflows.
+% Titles additionally get hyphenpenalty=10000 locally (not document-wide)
+% so a long title wraps at word boundaries instead of mid-word.
 \newcommand{\entry}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \textcolor{textgray}{#2}
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\hyphenpenalty=10000\exhyphenpenalty=10000\textbf{#1}} & \textcolor{textgray}{#2}
   \end{tabularx}\\
-  \textcolor{textgray}{#3}\par\vspace{0.5em}
+  {\raggedright\textcolor{textgray}{#3}\par}\vspace{0.5em}
 }
 
 \newcommand{\fund}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \textcolor{textgray}{#2}
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\hyphenpenalty=10000\exhyphenpenalty=10000\textbf{#1}} & \textcolor{textgray}{#2}
   \end{tabularx}\\
-  \textcolor{textgray}{$\cdot$\ #3}\par\vspace{0.5em}
+  {\raggedright\textcolor{textgray}{$\cdot$\ #3}\par}\vspace{0.5em}
 }
 
 % Malgun Gothic has no italic shape, so publication venue lines are set
@@ -49,7 +52,7 @@
 \newcommand{\pub}[4]{%
   \textbf{#1}\\
   #2\\
-  \textcolor{textgray}{#3}#4\par\vspace{0.6em}
+  {\raggedright\textcolor{textgray}{#3}#4\par}\vspace{0.6em}
 }
 
 \begin{document}
@@ -68,11 +71,8 @@
   \href{https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en}{Google Scholar}
   \par
   \vspace{0.5em}
-  \begin{tabular}{c@{\hspace{1.2cm}}c}
-    \qrcode[height=1.3cm]{https://qazyunho.github.io/website/} &
-    \qrcode[height=1.3cm]{https://gist-dslab.github.io/SOLAR-V2/} \\[0.15em]
-    {\footnotesize 개인 웹사이트} & {\footnotesize SOLAR-V2 Demo}
-  \end{tabular}
+  \qrcode[height=1.3cm]{https://qazyunho.github.io/website/}\par
+  {\footnotesize 개인 웹사이트}
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.2\textwidth}
@@ -122,7 +122,7 @@
 {연구실 전시 부스를 운영하며 방문객들에게 연구실 연구 분야를 소개}
 
 \entry{GIST Summer Undergraduate Research Fellowship (G-SURF) -- 학부연구생}{2024.06 -- 2024.08}
-{GIST Data Science Lab에서 Sundong Kim 교수님과 Jaehyun Park의 지도 하에 오프라인 강화학습(VAE/LDCQ)의 잠재 공간 표현 연구 수행. 2024년 11월 고려대·KAIST·GIST 공동 연구 교류 행사에서 발표했으며, 현재 석사 과정 연구 주제로 이어짐}
+{GIST Data Science Lab에서 Sundong Kim 교수님과 Jaehyun Park의 지도 하에 오프라인 강화학습 (VAE/LDCQ)의 잠재 공간 표현 연구 수행. 2024년 11월 고려대·KAIST·GIST 공동 연구 교류 행사에서 발표했으며, 현재 석사 과정 연구 주제로 이어짐}
 
 \section{특허}
 
