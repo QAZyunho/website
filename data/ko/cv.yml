@@ -11,7 +11,7 @@ service:
     detail: "GIST AI대학원 오픈랩 행사에서 총 4개 학기(2024 가을, 2025 봄, 2025 가을, 2026 봄)에 걸쳐 방문 학생들에게 연구실 소개"
     period: 2024 가을학기 - 2026 봄학기
   - role: GIST Global Internship Program (GIP) - 멘토
-    detail: 여름 인턴 1명을 2개월간 멘토링
+    detail: GIST 글로벌 인턴십 프로그램(GIP)을 통해 해외 인턴 1명을 2개월간 멘토링
     period: 2025.06 - 2025.08
   - role: 2025 대한민국과학기술대전 - 부스 운영
     detail: "연구실 전시 부스를 운영하며 방문객들에게 연구실 연구 분야를 소개"

@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{qrcode}
 
 \setmainfont{Malgun Gothic}
 
@@ -46,7 +47,7 @@
 \begin{document}
 
 \noindent
-\begin{minipage}[c]{0.75\textwidth}
+\begin{minipage}[t]{0.75\textwidth}
   {\Huge\bfseries 김윤호}\par
   \vspace{0.5em}
   \color{textgray}
@@ -57,9 +58,16 @@
   \href{https://github.com/QAZyunho}{github.com/QAZyunho}
   \;\textbar\;
   \href{https://scholar.google.com/citations?user=fFWoy8gAAAAJ&hl=en}{Google Scholar}
+  \par
+  \vspace{0.5em}
+  \begin{tabular}{c@{\hspace{1.2cm}}c}
+    \qrcode[height=1.3cm]{https://qazyunho.github.io/website/} &
+    \qrcode[height=1.3cm]{https://gist-dslab.github.io/SOLAR-V2/} \\[0.15em]
+    {\footnotesize 개인 웹사이트} & {\footnotesize SOLAR-V2 Demo}
+  \end{tabular}
 \end{minipage}%
 \hfill
-\begin{minipage}[c]{0.2\textwidth}
+\begin{minipage}[t]{0.2\textwidth}
   \raggedleft
   \includegraphics[width=2.6cm]{../static/images/picture.jpg}
 \end{minipage}
@@ -91,7 +99,7 @@
 \fund{Scholarship for Summer Session Abroad (UC Berkeley)}{2023.06 -- 2023.08}
 {해외 하계 세션 참여 학생 대상 장학금}
 
-\section{학술 활동}
+\section{활동}
 
 \entry{TAIC'26: Thinking about AI's Capability -- 운영 스태프}{2026.07}
 {ICML 2026 직전 우리 연구실(GIST Data Science Lab)이 주최한 워크숍 TAIC'26의 현장 운영 지원}
@@ -100,7 +108,7 @@
 {GIST AI대학원 오픈랩 행사에서 총 4개 학기(2024 가을, 2025 봄, 2025 가을, 2026 봄)에 걸쳐 방문 학생들에게 연구실 소개}
 
 \entry{GIST Global Internship Program (GIP) -- 멘토}{2025.06 -- 2025.08}
-{여름 인턴 1명을 2개월간 멘토링}
+{GIST 글로벌 인턴십 프로그램(GIP)을 통해 해외 인턴 1명을 2개월간 멘토링}
 
 \entry{2025 대한민국과학기술대전 -- 부스 운영}{2025.04}
 {연구실 전시 부스를 운영하며 방문객들에게 연구실 연구 분야를 소개}
@@ -116,7 +124,7 @@
 \fund{[특허출원] 적응적 재평가 기반 실행 시스템 및 이의 제어 방법, 그리고 적응적 재평가 기반 실행 시스템의 학습 방법}{2025.10}
 {GIST 산학협력단 · 공동발명자 (지분 25\%) · 국내 특허 출원 (출원번호 10-2025-0148979). 장기 지평 의사결정에서 실행 계획의 재평가 시점을 적응적으로 결정하는 시스템과 그 학습 방법에 관한 발명입니다}
 
-\section{출판물}
+\section{논문}
 
 \pub{On the Role of Proposal Support in Diffusion-Based Offline RL for Sequential Decision-Making}
 {Yunho Kim, Jaehyun Park, Heejun Kim, Sejin Kim, Byung-Jun Lee, Sundong Kim}
