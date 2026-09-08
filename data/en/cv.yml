@@ -35,7 +35,7 @@ service:
     detail: "Staffed our lab's exhibition booth and introduced our lab's research areas to expo visitors"
     period: Apr. 2025
   - role: GIST Summer Undergraduate Research Fellowship (G-SURF) - Researcher
-    detail: "Researched latent space representations in offline RL (VAE/LDCQ) under Prof. Sundong Kim and Jaehyun Park, GIST Data Science Lab; presented at a joint research symposium with Korea University and KAIST (Nov. 2024), which developed into my current M.S. thesis topic"
+    detail: "Researched latent space representations in offline RL (VAE/LDCQ) under Prof. Sundong Kim and Jaehyun Park (integrated M.S.-Ph.D. student), GIST Data Science Lab"
     period: Jun. 2024 - Aug. 2024
     posterUrl: posters/GSURF_2024_Poster.pdf
 patents:

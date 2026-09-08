@@ -17,7 +17,7 @@ service:
     detail: "연구실 전시 부스를 운영하며 방문객들에게 연구실 연구 분야를 소개"
     period: 2025.04
   - role: GIST Summer Undergraduate Research Fellowship (G-SURF) - 학부연구생
-    detail: "GIST Data Science Lab에서 Sundong Kim 교수님과 Jaehyun Park의 지도 하에 오프라인 강화학습 (VAE/LDCQ)의 잠재 공간 표현 연구 수행. 2024년 11월 고려대·KAIST·GIST 공동 연구 교류 행사에서 발표했으며, 현재 석사 과정 연구 주제로 이어짐"
+    detail: "GIST Data Science Lab에서 김선동 교수님과 박재현 석박통합과정생의 지도 하에 오프라인 강화학습(VAE/LDCQ)의 잠재 공간 표현 연구 수행"
     period: 2024.06 - 2024.08
     posterUrl: posters/GSURF_2024_Poster.pdf
 patents:
