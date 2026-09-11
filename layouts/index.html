@@ -62,6 +62,7 @@
       {{ with .award }}<span class="paper-award">🏆 {{ . }}</span>{{ end }}
       {{ with .paperPdf }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_pdf" }}</a>{{ end }}
       {{ with .posterUrl }}<a class="link-pill" href="{{ . | relURL }}">{{ i18n "link_poster" }}</a>{{ end }}
+      {{ with .projectUrl }}<a class="link-pill" href="{{ . }}">{{ i18n "link_project" }}</a>{{ end }}
     </li>
     {{ end }}
   </ul>
