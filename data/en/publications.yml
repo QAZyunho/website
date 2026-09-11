@@ -7,7 +7,6 @@
   paperUrl: https://openreview.net/forum?id=roLdW7qeCO
   paperPdf: papers/SOLAR_ICML_Workshop_2026_Paper.pdf
   posterUrl: posters/SOLAR_ICML_Workshop_2026_Poster.pdf
-  projectUrl: https://gist-dslab.github.io/SOLAR-V2/#/
 - title: "Diffusion-Guided Q-Learning for Offline RL: Adaptive Revaluation for Long-Horizon Decision Making"
   authors: "Jaehyun Park, **Yunho Kim**, Sejin Kim, Byung-Jun Lee, Sundong Kim"
   venue: "CoRL 2025 Workshop LEAP"

@@ -25,6 +25,7 @@
       {{ with site.Params.googleScholar }}<a href="{{ . }}">{{ i18n "social_scholar" }}</a>{{ end }}
       {{ with site.Params.github }}<a href="{{ . }}">{{ i18n "social_github" }}</a>{{ end }}
       {{ with site.Params.linkedin }}<a href="{{ . }}">{{ i18n "social_linkedin" }}</a>{{ end }}
+      {{ with site.Params.solarV2 }}<a href="{{ . }}">SOLAR-V2</a>{{ end }}
       {{ if ne (index $s "cv") false }}<a href="{{ "cv/" | relLangURL }}">{{ i18n "social_cv" }}</a>{{ end }}
     </div>
   </div>
